@@ -1,0 +1,34 @@
+.friends_card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 10px;
+  }
+  /* image */
+  .friends_card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  /* name */
+  .friends_card h3 {
+    margin: 0;
+  }
+  /* button */
+  .friends_card button {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: auto;
+  }
+
+  .friends_card button:hover {
+    background-color: #3e8e41;
+  }
+  

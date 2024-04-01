@@ -1,0 +1,12 @@
+
+
+friendsData = {
+    "_id": "Gf6fsdTBR",
+    "username": "2O7wKRN1ESYnkOIhAjfCo5PlLRt1",
+    "activity": "Being lazy today working on nonsense",
+    "detail": "Nonsense nothing Im doing nothing",
+    "image": "2O7WKRN1ESYNKOIHAJFCO5PLLRT11709939330262",
+    "displayName": "friendtester",
+    "dateAdded": "2024-03-08T23:08:49.802Z",
+    "__v": 0
+};
