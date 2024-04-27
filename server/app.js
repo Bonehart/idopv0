@@ -60,6 +60,21 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+const crypto = require('crypto');
+
+const session = require('express-session');
+
+
+const secret = crypto.randomBytes(32).toString('hex');
+app.use(session({
+  secret: 'your_secret_key', // Change this to a random string
+  resave: false,
+  saveUninitialized: false
+}));
+
+// Other middleware and route handlers...
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

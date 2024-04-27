@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import  './css/login.css';
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
 import { app, logInWithEmailAndPassword, logOut } from './Firebase'
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -14,7 +14,7 @@ import 'firebase/compat/firestore';
 import { useNavigate } from 'react-router-dom';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-
+import ResponsiveAppBar from './components/Toolbar.js';
 const auth = getAuth();
 const firebaseApp = require('./Firebase.js')
 
@@ -49,12 +49,19 @@ if(loggedout){
 <div>  
     <p> Thank you for using... </p>
     <p onClick ={ e => setloggedout(false)}> Log back in </p>
-    </div>
+    </div> 
   )
 }
 
 return (
+<div class ="body"> 
+<ResponsiveAppBar />
 
+
+<br>
+</br>
+
+<p> Login</p>
       <div class="container">
       <div class="account-card">
         
@@ -77,6 +84,8 @@ return (
         </div>
        <p> {loginerror}</p>
      </div>
+    </div>
+
     </div>
   );
 }

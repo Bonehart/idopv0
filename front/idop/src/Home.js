@@ -100,10 +100,18 @@ function Home() {
           setuserid(userlog.uid);
 
           settokenid(idToken);
+
+          sessionStorage.setItem("token", idToken);
+
+
+
           getuserData(setuserdata, userlog.uid, idToken, setloadingvar);
           getFriends(userlog.uid, setfriendlist, setfriendrequestslist);
           getUsers(setuserslist, setloadingvar, userlog.uid);
           getfriendsdata(setfriendsdata, userlog.uid, idToken);
+
+         
+
         },
           (error) => {
             console.log("is no user log");
@@ -112,7 +120,12 @@ function Home() {
       else { }
       setauthvar(false);
     });
+
+
   }, [tokenid, modify, deleted, loadingvar, account, refresh, frienddataview, viewcurrentfrienduserdata])
+
+
+
 
 
   // check if loading is true and display loading page used for retrieving data ect //
@@ -147,35 +160,7 @@ function Home() {
     > </Newactivity>
   }
 
-  // if there is not data direct user to start adding some content
-  if (userdata.length === 0) {
-    return (
-      <>
-
-        <div class="header-top">
-          <ResponsiveAppBar />
-          <div class="header">{userdata}</div>
-        </div>
-
-        <div class="body">
-          No content yet ! try adding some content !
-          <div class="new-activity-card">
-            <input type="text" readOnly class="new-text-box" value="Enter new activity ?" onClick={() => setnewtask(true)} />
-          </div>
-
-          <Buttonmenu
-            setfrienddataview={setfrienddataview}
-            setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
-            viewcurrentfrienduserdata={viewcurrentfrienduserdata}
-            setfriends={setfriends}
-            setviewfriends={setviewfriends}
-            setviewfriendrequests={setviewfriendrequests}
-          >
-          </Buttonmenu>
-        </div>
-      </>
-    )
-  }
+  
 
 
   // if account button is clicked //
@@ -283,8 +268,8 @@ function Home() {
                   <h3>{x.friendName}</h3>
                   <p>3 mutual friends sgsg</p>
                 </div>
-                {x.status ? <button onClick={() => { confirmFriend(userid, x.friend_id, x.friendName, false, addfrienddb); setrefresh(!refresh); }} > Remove friend ! </button>
-                  : <button onClick={() => { confirmFriend(userid, x.friend_id, x.friendName, true, addfrienddb); setrefresh(!refresh); }} > Cancel request</button>
+                {x.status ? <button  class="small-button" onClick={() => { confirmFriend(userid, x.friend_id, x.friendName, false, addfrienddb); setrefresh(!refresh); }} > Remove friend ! </button>
+                  : <button class="small-button" onClick={() => { confirmFriend(userid, x.friend_id, x.friendName, true, addfrienddb); setrefresh(!refresh); }} > Cancel request</button>
                 }
               </div>
             </>
@@ -292,8 +277,7 @@ function Home() {
           <div class="friends_card">
           </div>
         </div>
-        <div class="rightSide">4</div>
-        <div class="footer">5</div>
+     
       </section>
 
     )
@@ -450,14 +434,7 @@ function Home() {
                     Back
                   </Button>
 
-                  {/*                   
-                      <ModifyButtonmenu
-                        onclickmodify={setmodify }
-                        onclickdelete={deletedatabyid}
-                        onclickdeleteimage={deleteimagebyid}
-                        currentpost = {currentpost}
-                        setdeleted= {setdeleted}>
-                      </ModifyButtonmenu> */}
+
            
                 </>
             )
@@ -473,7 +450,7 @@ function Home() {
       <div class="header-top">
         <ResponsiveAppBar accounthandle={setaccount} />
         <Typography variant="h5" gutterBottom>
-          Welcome {usernm.displayName} !
+          Welcome hdhd {usernm.displayName} !
         </Typography>
       </div>
 
@@ -495,8 +472,8 @@ function Home() {
           </Buttonmenu>
 
         <div class="content-buffer">        {viewcurrentfrienduserdata ?  <h1 class="card-heading-user"> "Profile of " {friendsdata[0].displayName} </h1> : <> </>}
-        {!viewcurrentfrienduserdata & !frienddataview ?  <h1 class="card-heading-user"> "Profile of " {userdata[0].displayName} </h1> : <> </>}
-        {frienddataview ?  <h1 class="card-heading-user"> "Friends of " {userdata[0].displayName} </h1> : <> </>} </div>
+        {!viewcurrentfrienduserdata & !frienddataview ?  <h1 class="card-heading-user"> "Profile of " {usernm.displayName} </h1> : <> </>}
+        {frienddataview ?  <h1 class="card-heading-user"> "Friends of " {usernm.displayName}  - showing friends of Testuser001 for Demo purposes but would otherwise show friends of current user only</h1> : <> </>} </div>
 
         {frienddataview ?
 

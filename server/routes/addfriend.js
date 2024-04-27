@@ -8,8 +8,10 @@ var shortid = require('shortid');
 var friend = require("../schemas/friends");
 const req = require("express/lib/request");
 var user = require("../checkauth");
+
 const {getAuth, auth } = require('firebase-admin/auth');
 
+var user = require("../checkauth");
 var bodyParser = require('body-parser');
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -30,7 +32,7 @@ async function submitfriend(data, model) {
     console.log(docs[0].username);
 };
 
-router.post("/addfriend", function(req, res, next) {
+router.post("/addfriend", checkIfAuthenticated, function(req, res, next) {
     console.log("Adding new friend...back end..");
 
       const uid = req.body.uid;

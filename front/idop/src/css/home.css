@@ -4,7 +4,13 @@ body {
   font-family: Arial, sans-serif;
 }
 
-
+.regcontainer {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 400px;
+}
 
 
 .container {
@@ -37,7 +43,7 @@ body {
   width: 100%;
 }
 .form-group button {
-  background-color: grey; 
+  background-color: blue; 
   border: none;
   border-radius: 3px;
   color: #fff;
@@ -49,7 +55,9 @@ body {
 }
 
 /*end css for account page */
-
+.small-button {
+  width: 100px;
+}
 
 
 body {
@@ -358,6 +366,12 @@ input[type=submit]:hover {
 .image-button:focus{
 
   background-color: lightgrey;
+}
+
+
+.layout button {
+
+  width: 150px;
 }
 /* .layout { */
   /* width: 1366px;

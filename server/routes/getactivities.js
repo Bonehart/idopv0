@@ -53,7 +53,7 @@ router.get("/", checkIfAuthenticated, function (req, res, next) {
 
 
 /**** route to get distinct list of users ****/
-router.get("/getrandusers", async function (req, res, next) {
+router.get("/getrandusers",checkIfAuthenticated, async function (req, res, next) {
 
     try {
         const distinctValues = await activity.distinct('username');
@@ -68,7 +68,7 @@ async function getfriends(model, uid) {
     // return model.find({"uid" : uid}).sort({ dateAdded: 'descending' }).then(function (frnd) { return frnd });
 };
 
-router.get("/getfriendsdata", async function (req, res,next) {
+router.get("/getfriendsdata",checkIfAuthenticated, async function (req, res,next) {
 
     friendslist = await friend.find({"uid" : req.query.username}).distinct("friend_uid");
 
@@ -83,7 +83,7 @@ router.get("/getfriendsdata", async function (req, res,next) {
 
 /**** route to get a single activity based on the id of that activity ****/
 /**** used in things like when you click on an activity to show more detailed info i.e it queries the db or list for that queries detailed info*****/
-router.get("/getbyid", function (req, res, next) {
+router.get("/getbyid", checkIfAuthenticated,function (req, res, next) {
     const id = req.query.id;
     activity.findById(id, function(err, result){
          if(err){
@@ -95,7 +95,7 @@ router.get("/getbyid", function (req, res, next) {
      })
 });
 
-router.get("/deletebyid", function (req, res, next) {
+router.get("/deletebyid",checkIfAuthenticated, function (req, res, next) {
      const id = req.query.id;
      activity.deleteOne({_id: id}, function(err, result){
           if(err){
@@ -109,7 +109,7 @@ router.get("/deletebyid", function (req, res, next) {
 
 /**** updated by id used for modifying records allows modification of text only  ****/
 /**** modifies the titles of the activity and the detail****/
-router.get("/deleteimagebyid", function (req, res,next) {
+router.get("/deleteimagebyid",checkIfAuthenticated, function (req, res,next) {
      var id_ = req.query.id;
       activity.findByIdAndUpdate(id_,{"image": "NOIMAGE"}, function(err, result){
            if(err){
@@ -123,22 +123,40 @@ router.get("/deleteimagebyid", function (req, res,next) {
 
 /**** updated by id used for modifying records allows modification of text only  ****/
 /**** modifies the titles of the activity and the detail****/
-router.post("/updatebyid", function (req, res,next) {
-     var id_ = req.body.id;
-     var  activitydata = req.body.activity;
-     var detail = req.body.detail;
+router.post("/updatebyid", checkIfAuthenticated,function (req, res,next) {
 
-    activity.findByIdAndUpdate(id_,{"activity": activitydata, "detail": detail}, function(err, result){
-           if(err){
-               res.send(err)
-           }
-           else{
-               res.send("activity modified")
-           }
-       })
+
+    try{
+console.log("running update by id");
+
+        var id_ = req.body.id;
+     
+        var  activitydata = req.body.activity;
+        var detail = req.body.detail;
+   
+       activity.findByIdAndUpdate(id_,{"activity": activitydata, "detail": detail}, function(err, result){
+              if(err){
+                  res.send(err)
+              }
+              else{
+                  res.send("activity modified")
+              }
+          })
+   
+
+
+
+    }
+    catch (e)
+    {
+
+        console.log("erroir is " + e);
+    }
+
+
 });
 
-router.post("/updatebyidimg", function (req, res,next) {
+router.post("/updatebyidimg", checkIfAuthenticated,function (req, res,next) {
     var id_ = req.body.id;
     var  activitydata = req.body.activity;
     var detail = req.body.detail;
@@ -157,7 +175,7 @@ router.post("/updatebyidimg", function (req, res,next) {
 
 /**** updated image by id used for modifying records allows modification of text only  ****/
 /**** modifies the text file name of image****/
-router.post("/updateimagebyid", function (req, res,next) {
+router.post("/updateimagebyid", checkIfAuthenticated,function (req, res,next) {
     var id_ = req.body.username;
 
     var  image = req.body.image;
@@ -174,7 +192,7 @@ router.post("/updateimagebyid", function (req, res,next) {
 
 /**** updated by id used for modifying records allows modification of text only  ****/
 /**** modifies the titles of the activity and the detail****/
-router.post("/deletebyid", function (req, res,next) {
+router.post("/deletebyid", checkIfAuthenticated,function (req, res,next) {
      var id_ = req.body.id;
       activity.deleteOne({"id_": String(id_)}, function(err, result){
            if(err){
@@ -187,7 +205,7 @@ router.post("/deletebyid", function (req, res,next) {
 });
 
 
-router.get("/gethomeact", function (req, res, next) {
+router.get("/gethomeact", checkIfAuthenticated,function (req, res, next) {
      getrandact(activity).then(function (x) {
    
           res.send(x);

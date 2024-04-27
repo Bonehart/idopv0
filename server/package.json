@@ -11,6 +11,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-fileupload": "^1.4.0",
+    "express-session": "^1.18.0",
     "firebase": "^9.10.0",
     "firebase-admin": "^11.0.1",
     "http-errors": "~1.6.3",

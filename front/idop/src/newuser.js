@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import  './css/login.css';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {registerWithEmailAndPassword} from "./Firebase.js"
-
+import ResponsiveAppBar from './components/Toolbar.js';
 
 function Newuser() {
 
@@ -54,41 +54,56 @@ function Newuser() {
 
       <div> 
       <p> Thank you for registering</p>
-          <Link to="/">return home </Link>
+          <Link to="/Home">return home </Link>
       </div>
     )
-  }
+  } 
      
   return (
 
-   <div>
 
-     <div class="container">
-   
-      <label for="screenname">Enter username: </label>
-        <input id="screenname" type="text" name="screenname" onChange={e => setscreenname(e.target.value)} placeholder="First Name"></input>
+ <div class = "body"> 
 
-         <label for="username">Enter Email: </label>
-        <input id="username" type="text" name="username" onChange={e => setusername(e.target.value)} placeholder="First Name"></input>
+          <ResponsiveAppBar />
 
-       <label for="password"> Enter password: </label>
-       <input id="password"  type="password" name="password"  onChange={e => setpassword(e.target.value)} ></input> 
-       <label for="password2"> Enter password: </label>
+    
+    <div class="regcontainer">
+      <br/>
+    <form>
+      <label for="screenname">Enter Username:</label>
+      <input id="screenname" type="text" name="screenname" onChange={e => setscreenname(e.target.value)} placeholder="First Name" required />
+  
+      <label for="username">Enter Email:</label>
+      <input id="username" type="email" name="username" onChange={e => setusername(e.target.value)} placeholder="Email" required />
+  
+      <label for="password">Enter Password:</label>
+      <input id="password" type="password" name="password" onChange={e => setpassword(e.target.value)} required />
+
+      <label for="password2"> Re-enter password: </label>
        <input id="password2"  type="password" name="password2"  onChange={e => setpassword2(e.target.value)}></input>
-
+      {isValid && !strongRegexpass ? (
+        <p>Password must be at least 6 characters long and contain a capital letter, a number, and a special character.</p>
+      ) : null}
       
+
+      {isValid && strongRegexpass ? (
+        
+      <button type="submit" disabled={!isValid || !strongRegexpass} onClick={e => {
+        registerWithEmailAndPassword(screenname, username, password);
+        setregistercomplete(true);
+      }}>Register</button>
+      ) : 
+      <button id="no-sub" type="submit" disabled={!isValid || !strongRegexpass} >Register</button>}
       
-      { (isValid == true && strongRegexpass == true) ?
-      <button onClick={e => {registerWithEmailAndPassword(screenname, username, password);
-    setregistercomplete(true) } }> Register </button>
-      : <p></p>
-      }
-
-      <p> {passworderror}</p>
-      <p> {"Rex is : " + strongRegexpass}</p>
-
-    </div>
-    </div>
+      {isValid && !strongRegexpass ? null : (
+        <p>{passworderror}</p>
+      )}
+  
+    </form>
+  </div>
+  
+  </div>
+    
   );
 }
 

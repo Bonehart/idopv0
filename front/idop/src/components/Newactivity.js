@@ -37,12 +37,11 @@ export const Newactivity = props => {
   }
 
   return (
-    <div>
+    <div class="body">
 
       <div class = 'new-post'> 
 
       <h2 class="card-heading">            Today's Activity</h2>
-      <input type="text" class="new-text-box2" onChange={props.onchange} placeholder="New Activity Title"  id="fname" name="fname"></input>
       <input type="text" class="new-text-box2" onChange={props.onchange} placeholder="New Activity Title"  id="fname" name="fname"></input>
       <TextField  style ={{width: '100%'}}
                   id ="activitydetail"
@@ -56,11 +55,12 @@ export const Newactivity = props => {
                   />
 
               <Button variant="contained"  type="submit"  onClick={()=>(document.getElementById('image').click())} >  <input hidden type="file" name="image" id ="image"/> Image </Button>
+              <Button variant="contained" onClick={props.onclick} >Write to time line</Button>
               <Button variant="contained" onClick={props.back} >
                 Back
               </Button>
 
-              <Button variant="contained" onClick={props.onclick} >Write to time line</Button>
+   
 
       </div>
     

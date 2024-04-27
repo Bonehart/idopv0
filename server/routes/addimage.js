@@ -9,7 +9,7 @@ const multer = require('multer');
 const path = require('path');
 const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 3000;
-
+var user = require("../checkauth");
 app.use(express.urlencoded({
     extended: true
   }))
@@ -30,7 +30,7 @@ app.use(express.urlencoded({
  const upload = multer({ storage: storage })
 
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/',checkIfAuthenticated, upload.single('image'), (req, res) => {
 
             res.send("file sent");
 })

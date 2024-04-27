@@ -24,7 +24,7 @@ export async function addfrienddb(uid, friend_uid,friendName,userName) {
     redirect: 'follow'
   };
   
-  fetch("http://localhost:9000/addfriend/addfriend", requestOptions)
+  fetch("http://172.105.254.65:9000/addfriend/addfriend", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
@@ -38,7 +38,7 @@ export function handleImageError(img) {
 
 
  export async function getuserData(hookVar, user, token,hookload) {
-     var apiUrl =  new URL('http://localhost:9000/getactivities');
+     var apiUrl =  new URL('http://172.105.254.65:9000/getactivities');
      var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer "  + token);
       myHeaders.append('Content-Type', 'application/json');
@@ -62,7 +62,8 @@ export function handleImageError(img) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + token);
     myHeaders.append("Content-Type", "application/json");
- 
+    console.log("user for get friends data is :");
+    console.log(user);
     // Convert parameters to query string if needed
     const params = new URLSearchParams({ username: "mKYLcOh65YcXdqNMb5l0l7FPv3J3" });
 
@@ -73,7 +74,7 @@ export function handleImageError(img) {
     };
 
     try {
-        let response = await fetch("http://localhost:9000/getactivities/getfriendsdata?" + params, requestOptions);
+        let response = await fetch("http://172.105.254.65:9000/getactivities/getfriendsdata?" + params, requestOptions);
         response = await response.json();
         console.log("response is : ");
         console.log(response);
@@ -120,7 +121,7 @@ export async function getdatafromlistbyuid (uid, list, hook, viewhook, viewhook2
 
 // this one will get the data by _id 
   export async function deletedatabyid(id, hookVar) {
-    var apiUrl =  new URL('http://localhost:9000/getactivities/deletebyid');
+    var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/deletebyid');
     var data = { "id" : id};
     for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
     let response = await  fetch(apiUrl)
@@ -132,7 +133,7 @@ export async function getdatafromlistbyuid (uid, list, hook, viewhook, viewhook2
    
 // this one will get the data by _id 
 export async function deleteimagebyid(id, hookVar) {
-  var apiUrl =  new URL('http://localhost:9000/getactivities/deleteimagebyid');
+  var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/deleteimagebyid');
   var data = { "id" : id};
   for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
   let response = await  fetch(apiUrl)
@@ -143,7 +144,7 @@ export async function deleteimagebyid(id, hookVar) {
 
   // this one will get the data by _id 
   export async function getdatabyid(hookVar, id) {
-    var apiUrl =  new URL('http://localhost:9000/getactivities/getbyid');
+    var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/getbyid');
     var data = { "id" : id};
     for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
     let response = await  fetch(apiUrl)
@@ -154,16 +155,25 @@ export async function deleteimagebyid(id, hookVar) {
 // update the record use for modify function once populated and changed (or not )
 
   export async function updatedata( data) {
-    var apiUrl =  new URL('http://localhost:9000/getactivities/updatebyid');
 
-    var id = { "id" : data.id};
-    var activity = { "activity" : data.activity};
-    var detail = { "detail" : data.detail};
+    try{
+      var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/updatebyid');
 
-    for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
+      var id = { "id" : data.id};
+      var activity = { "activity" : data.activity};
+      var detail = { "detail" : data.detail};
+  
+      for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
+  
+      let response = await  fetch(apiUrl)
+      response = await response.json()
+    } 
 
-    let response = await  fetch(apiUrl)
-    response = await response.json()
+    catch (e){
+
+      console.log("error ius : " + e)
+    }
+
 
   }
 
@@ -191,12 +201,19 @@ export async function deleteimagebyid(id, hookVar) {
     formData.append('key',keyValue.toUpperCase());
     formData.append('image', fileField.files[0]);
     formData.append('user', id);
-
+    const x = sessionStorage.getItem("token");
 
     if (fileField.files[0] === undefined) {
 
+
+
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer "  +  x);
+      myHeaders.append('Content-Type', 'application/json');
+
+
       // console.log("didnt detect image");
-      fetch('http://localhost:9000/getactivities/updatebyid', {
+      fetch('http://172.105.254.65:9000/getactivities/updatebyid', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -210,18 +227,23 @@ export async function deleteimagebyid(id, hookVar) {
   } else {
 
 
-
-  fetch('http://localhost:9000/getactivities/updatebyidimg', {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "  +  x);
+    myHeaders.append('Content-Type', 'application/json');
+    
+  fetch('http://172.105.254.65:9000/getactivities/updatebyidimg', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
+
+  
     mode: 'cors',
   
     // body: JSON.stringify(formDatar)
   body:JSON.stringify( { detail: detail, id: id, activity: activity, image: keyValue.toUpperCase()   })
    }).then(
-    fetch('http://localhost:9000/addimage', {
+    fetch('http://172.105.254.65:9000/addimage', {
     method: 'POST',
     mode: 'cors',
     body: formData
@@ -240,10 +262,17 @@ export async function deleteimagebyid(id, hookVar) {
     formDatar.append('detail', detail);
     formDatar.append('id', id);
 
-    fetch('http://localhost:9000/getactivities/updatebyid', {
+    const x = sessionStorage.getItem("token");
+
+    // var myHeaders = new Headers();
+    // myHeaders.append("Authorization", "Bearer "  +  x);
+    // myHeaders.append('Content-Type', 'application/json');
+
+    fetch('http://172.105.254.65:9000/getactivities/updatebyid', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        headers: { 'Content-Type': 'application/json' , 'Authorization': "Bearer "  +  x }
       },
       mode: 'cors',
 
@@ -254,15 +283,19 @@ export async function deleteimagebyid(id, hookVar) {
 
 
   export async function sendFile(uid)  {
-    // console.log("saving/updating image");
-    var apiUrl = 'http://localhost:9000/getactivities/updateimagebyid';
+     console.log("saving/updating image");
+    var apiUrl = 'http://172.105.254.65:9000/getactivities/updateimagebyid';
     var keyValue = uid + Date.now();
   // Simple POST request with a JSON body using fetch
+
+  const x = sessionStorage.getItem("token");
+  
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' ,  'Authorization': "Bearer "  +  x },
     body: JSON.stringify({ username: uid,  image: keyValue.toUpperCase() })
   };
+
 
     const formData = new FormData();
     const fileField = document.querySelector('input[type="file"]');
@@ -270,9 +303,15 @@ export async function deleteimagebyid(id, hookVar) {
     formData.append('image', fileField.files[0]);
     formData.append('user', uid);
 
+
+
     await fetch(apiUrl, requestOptions).then(
-      fetch('http://localhost:9000/addimage', {
+      fetch('http://172.105.254.65:9000/addimage', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        headers: { 'Content-Type': 'application/json' , 'Authorization': "Bearer "  +  x }
+      },
       mode: 'cors',
       
       body: formData

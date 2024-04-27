@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 
 
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 import Login from "./Login";
 import Home from "./Home";
 import React, {Component} from 'react'
