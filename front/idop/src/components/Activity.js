@@ -22,13 +22,17 @@ export const Activity = props => {
 
   return (
     <div className={props.post.image !== "" ? "activity-card" : "activity-card-small"}>
-        {/* {props.label}{props.post.image } */}
+
             <div class="activity-card2">
 
                 {props.userpage ?
                     <h1 class="card-heading-user"> {props.post.displayName}</h1>
                 : 
-            <h1 class="card-heading" onClick={() => {props.getdatafromlistbyuid(props.post.username, props.friendsdata, props.setcurrentfrienduserdata, props.setviewcurrentfrienduserdata, props.setfrienddataview); props.setviewcurrentfrienduserdata(true);}}>  {props.post.displayName}</h1>
+            <h1 class="card-heading" onClick={() => {props.getdatafromlistbyuid(props.post.username, props.friendsdata, props.setcurrentfrienduserdata, props.setviewcurrentfrienduserdata, props.setfrienddataview); 
+            // props.setviewfrienduserdata(false); props.setviewcurrentfrienduserdata(true);
+          
+          }}>  
+            {props.post.displayName}</h1>
 }
 
             <h2 class="card-heading2" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>            {props.post.activity}</h2>
@@ -37,7 +41,6 @@ export const Activity = props => {
     </div>
     <div class="activity-card2">
      
-      
       <img class="card-third-div" src={"/Images/" +  props.post.image + ".png"} alt =""  onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
 
       </img>

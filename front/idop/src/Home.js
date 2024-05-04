@@ -6,8 +6,6 @@ import './css/login.css';
 import './css/home.css';
 import './css/friends.css';
 
-
-
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { getAuth, createUserWithEmailAndPassword, getIdToken } from "firebase/auth";
 import { Database, getDatabase } from "firebase/database";
@@ -47,7 +45,7 @@ function Home() {
   const [tokenid, settokenid] = useState("");
   // save all the data from the  mongoDb from the user comes from getuserData method setuserdata hook is passed as an argument//
   const [userdata, setuserdata] = useState('nothing');
-  const [currentfrienduserdata, setcurrentfrienduserdata] = useState(false);
+  const [currentfrienduserdata, setcurrentfrienduserdata] = useState("nothing");
 
   const [viewcurrentfrienduserdata, setviewcurrentfrienduserdata] = useState(false);
   // set the userid of the user needed for accessing things from firebase where userid is used to ID the user //
@@ -103,8 +101,6 @@ function Home() {
 
           sessionStorage.setItem("token", idToken);
 
-
-
           getuserData(setuserdata, userlog.uid, idToken, setloadingvar);
           getFriends(userlog.uid, setfriendlist, setfriendrequestslist);
           getUsers(setuserslist, setloadingvar, userlog.uid);
@@ -124,7 +120,14 @@ function Home() {
 
   }, [tokenid, modify, deleted, loadingvar, account, refresh, frienddataview, viewcurrentfrienduserdata])
 
-
+  // check if a username is returned if not directer user to login
+  if (!usernm) {
+    return (
+      < div>         <p> Please login :  </p>
+        <Link to="/Login"> Login </Link>
+      </div>
+    )
+  }
 
 
 
@@ -140,14 +143,7 @@ function Home() {
     return <p> is loading auth </p>;
   }
 
-  // check if a username is returned if not directer user to login
-  if (!usernm) {
-    return (
-      < div>         <p> Please login :  </p>
-        <Link to="/Login"> Login </Link>
-      </div>
-    )
-  }
+
 
   // if the new task flag is set then return the Newactivity component//
   if (newtask) {
@@ -155,6 +151,8 @@ function Home() {
       onchange={e => setactivity(e.target.value)}
       onchangedetail={e => setdetailtext(e.target.value)}
       onclick={() => { postactivity(tokenid, userid, activity, detailtext, usernm.displayName).then(() => { getuserData(setuserdata, userid, tokenid, setloadingvar, setnewtask); }) }}
+
+      
       back={() => { setnewtask(false) }}
       textdetail={detailtext}
     > </Newactivity>
@@ -238,7 +236,6 @@ function Home() {
       </section>
     )
   }
-
 
   //view friends
   if (viewfriends) {
@@ -465,36 +462,44 @@ function Home() {
             setfrienddataview={setfrienddataview}
             setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
             viewcurrentfrienduserdata={viewcurrentfrienduserdata}
+     
             setfriends={setfriends}
             setviewfriends={setviewfriends}
             setviewfriendrequests={setviewfriendrequests}
           >
           </Buttonmenu>
 
-        <div class="content-buffer">        {viewcurrentfrienduserdata ?  <h1 class="card-heading-user"> "Profile of " {friendsdata[0].displayName} </h1> : <> </>}
+        <div class="content-buffer">        {viewcurrentfrienduserdata ?  <h1 class="card-heading-user"> "Only Profile of " {friendsdata[0].displayName} </h1> : <> </>}
         {!viewcurrentfrienduserdata & !frienddataview ?  <h1 class="card-heading-user"> "Profile of " {usernm.displayName} </h1> : <> </>}
-        {frienddataview ?  <h1 class="card-heading-user"> "Friends of " {usernm.displayName}  - showing friends of Testuser001 for Demo purposes but would otherwise show friends of current user only</h1> : <> </>} </div>
+        {/* {frienddataview ?  <h1 class="card-heading-user"> "Friends of " {usernm.displayName}  - showing friends of Testuser001 for Demo purposes but would otherwise show friends of current user only</h1> : <> </>}  */}
+        
+        </div>
 
         {frienddataview ?
 
           friendsdata.map((post) => (
 
+            <>
+
+sgsgsgsg 
             <Activity
+            
               label={"friends data "}
               post={post}
               setdetailed={setdetailed}
-              setcurrentpost={setcurrentpost}
               setcurrentfrienduserdata={setcurrentfrienduserdata}
               setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
               setfrienddataview={setfrienddataview}
               getdatafromlistbyuid={getdatafromlistbyuid}
-              friendsdata={false}
+              friendsdata={friendsdata}
 
-            > </Activity>
+            > </Activity> </>
           ))
           :
           (viewcurrentfrienduserdata ? currentfrienduserdata.map((post) => (
 
+            <>
+aaaaaaaaa
             <Activity
               label={"current friends data "}
               post={post}
@@ -506,7 +511,7 @@ function Home() {
               getdatafromlistbyuid={getdatafromlistbyuid}
               friendsdata={friendsdata}
               userpage={false}
-            > </Activity>
+            > </Activity> </>
           )) : userdata.map((post) => (
 
             <>

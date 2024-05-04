@@ -89,7 +89,8 @@ export function handleImageError(img) {
 
 
 export async function getdatafromlistbyuid (uid, list, hook, viewhook, viewhook2){
-
+  console.log("lidy is : ");
+  console.log(list);
   var filtered = list.filter((list) => list.username == uid);
   console.log("filtereed is : ");
   console.log(filtered);

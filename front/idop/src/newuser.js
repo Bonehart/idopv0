@@ -100,6 +100,8 @@ function Newuser() {
       )}
   
     </form>
+
+    <Link to="/">Back </Link>  
   </div>
   
   </div>

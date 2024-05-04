@@ -127,8 +127,8 @@ input[type=submit]:hover {
   overflow: hidden;
   margin: 16px;
   /* height: 810px; */
-  width: 1080px;
-
+  /* width: 1080px; */
+  width: 80%;
 
   /* display: flex;
   flex-direction: column; */
@@ -152,7 +152,8 @@ input[type=submit]:hover {
   overflow: hidden;
   margin: 16px;
   height: 210px;
-  width: 1080px;
+  /* width: 1080px; */
+   width:  80%; 
 
 
   /* display: flex;
@@ -170,8 +171,14 @@ input[type=submit]:hover {
 
 }
 
+
+
+
+
+
 .activity-card2 {
-  padding: 16px;
+  /* padding: 16px; */
+  padding: 5%;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -252,12 +259,12 @@ input[type=submit]:hover {
   margin: 1vh;
   -webkit-tap-highlight-color: transparent;
   min-width: 0;
-  width: 95%;
+  width: 95%; 
   -webkit-animation-name: mui-auto-fill-cancel;
   animation-name: mui-auto-fill-cancel;
   -webkit-animation-duration: 10ms;
   animation-duration: 10ms;
-  padding: 16.5px 14px;
+   padding: 16.5px 14px; 
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
@@ -338,12 +345,69 @@ input[type=submit]:hover {
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   margin: 16px;
-  height: 700px;
+  /* height: 700px; */
+  height: 55%;
+  /* width: 700px; */
 
-  width: 700px;
+
   display: flex;
   flex-direction: column;
   padding: 25px;
+}
+
+/* Media query for screens between 600px and 900px */
+@media screen and (min-width: 460px)  {
+  .new-post {
+  width: 700px; 
+
+  }
+  .button-container {
+
+    width: 400px;
+    height: 100px;
+  
+  }
+
+  .image-button {
+
+    width: 75px; /* Fill the entire div */
+
+  }
+
+  
+
+}
+
+/* Media query for screens between 600px and 900px */
+@media screen and (min-width: 100px) and (max-width: 459px) {
+  .new-post {
+    width: 85%;
+  }
+
+  .image-button {
+
+    width: 50px; /* Fill the entire div */
+
+  }
+
+
+  
+.new-activity-card {
+ 
+  width:75%;
+
+}
+
+.button-container {
+
+  height: 75px;
+  width: 300px;
+
+}
+
+
+
+
 }
 
 .new-post-det {
@@ -442,8 +506,8 @@ img[src=""] {
 
 .button-container {
   display: flex;
-  width: 600px;
-  height: 150px;
+   /* width: 600px; */
+  /* height: 150px;  */
 }
 
 
@@ -457,10 +521,10 @@ img[src=""] {
    display: flex;
    flex-direction: row;
   /* width: 50%; */
-  height: 100px;
+  /* height: 100px; */
   align-items: center;
   justify-content: center;
-  
+   
   /* margin-left: auto; 
   margin-right: auto;  */
 }
@@ -471,26 +535,16 @@ img[src=""] {
 .button-container div {
   flex: 1; /* Makes all child divs the same size */
   background-color: white; /* Optional background color */
-  margin: 5px; /* Optional margin for spacing */
+  /* margin: 5px; */
   border: solid 1px;
   border-color: white;
 }
 
-.image-button {
-  border: none;
-  border-radius: 50%; /* Make buttons circular */
-  background-color: #eee; /* Optional background color */
-  padding: 0; /* Remove default button padding */
-  width: 100px; /* Fill the entire div */
-  height:100%; /* Set button height (adjust as needed) */
-  /* overflow: hidden; Prevent image overflow */
-  cursor: pointer; /* Add a pointer for interactivity */
-  object-fit: contain;
-}
+
 
 
 .image-button  img, .image-button-modify img {
-  width: 80%; /* Ensure images fill the button */
+  /* width: 80%; */
   height: 60%; /* Ensure images maintain aspect ratio */
   object-fit: contain; /* Cover entire button area while preserving aspect ratio */
 }
@@ -501,9 +555,9 @@ img[src=""] {
   border-radius: 50%; /* Make buttons circular */
   background-color: #eee; /* Optional background color */
   padding: 0; /* Remove default button padding */
-  width: 100px; /* Fill the entire div */
-  height:100%; /* Set button height (adjust as needed) */
-  /* overflow: hidden; Prevent image overflow */
+
+
+  height:100%;
   cursor: pointer; /* Add a pointer for interactivity */
   object-fit: contain;
 }
@@ -515,7 +569,7 @@ img[src=""] {
   padding: 0; /* Remove default button padding */
   width: 100px; /* Fill the entire div */
   height:100%; /* Set button height (adjust as needed) */
-  /* overflow: hidden; Prevent image overflow */
+
   cursor: pointer; /* Add a pointer for interactivity */
   object-fit: contain;
 }
