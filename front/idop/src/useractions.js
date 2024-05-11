@@ -206,12 +206,9 @@ export async function deleteimagebyid(id, hookVar) {
 
     if (fileField.files[0] === undefined) {
 
-
-
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer "  +  x);
       myHeaders.append('Content-Type', 'application/json');
-
 
       // console.log("didnt detect image");
       fetch('http://172.105.254.65:9000/getactivities/updatebyid', {
@@ -224,9 +221,7 @@ export async function deleteimagebyid(id, hookVar) {
         // body: JSON.stringify(formDatar)
       body:JSON.stringify( { detail: detail, id: id, activity: activity})
        });
-     
   } else {
-
 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer "  +  x);
@@ -238,17 +233,16 @@ export async function deleteimagebyid(id, hookVar) {
       'Content-Type': 'application/json'
     },
 
-  
     mode: 'cors',
-  
-    // body: JSON.stringify(formDatar)
-  body:JSON.stringify( { detail: detail, id: id, activity: activity, image: keyValue.toUpperCase()   })
-   }).then(
-    fetch('http://172.105.254.65:9000/addimage', {
-    method: 'POST',
-    mode: 'cors',
-    body: formData
-  })
+
+      // body: JSON.stringify(formDatar)
+    body:JSON.stringify( { detail: detail, id: id, activity: activity, image: keyValue.toUpperCase()   })
+    }).then(
+      fetch('http://172.105.254.65:9000/addimage', {
+      method: 'POST',
+      mode: 'cors',
+      body: formData
+    })
    );
 
   }

@@ -52,12 +52,17 @@ export async function postactivity(tokenid, userid, activity, detail, displayNam
 
   } else {
 
+    try { 
+
     console.log('no image was found');
     formData.append('username', userid);
     formData.append('key', keyValue.toUpperCase());
     formData.append('displayName', displayName);
+    console.log('')
 
-    await fetch(apiUrl, requestOptions);
+    await fetch(apiUrl, requestOptions);}  catch (error) { console.log(error) };
+
+
 
   }
 

@@ -87,7 +87,7 @@ function Home() {
   const [deleted, setdeleted] = useState(false);
   const [viewfriends, setviewfriends] = useState(false);
   const [friendsdata, setfriendsdata] = useState(["empty"]);
-  const [frienddataview, setfrienddataview] = useState(true);
+  const [frienddataview, setfrienddataview] = useState(false);
 
   // react hook re-load data when key hooks are modified //
   useEffect(() => {
@@ -105,8 +105,6 @@ function Home() {
           getFriends(userlog.uid, setfriendlist, setfriendrequestslist);
           getUsers(setuserslist, setloadingvar, userlog.uid);
           getfriendsdata(setfriendsdata, userlog.uid, idToken);
-
-         
 
         },
           (error) => {
@@ -150,15 +148,13 @@ function Home() {
     return <Newactivity
       onchange={e => setactivity(e.target.value)}
       onchangedetail={e => setdetailtext(e.target.value)}
-      onclick={() => { postactivity(tokenid, userid, activity, detailtext, usernm.displayName).then(() => { getuserData(setuserdata, userid, tokenid, setloadingvar, setnewtask); }) }}
+      onclick={() => { postactivity(tokenid, userid, activity, detailtext, usernm.displayName).then(() => {  getuserData(setuserdata, userid, tokenid, setloadingvar, setnewtask);   setnewtask(!newtask);}) }}
 
-      
+
       back={() => { setnewtask(false) }}
       textdetail={detailtext}
     > </Newactivity>
   }
-
-  
 
 
   // if account button is clicked //
@@ -265,7 +261,7 @@ function Home() {
                   <h3>{x.friendName}</h3>
                   <p>3 mutual friends sgsg</p>
                 </div>
-                {x.status ? <button  class="small-button" onClick={() => { confirmFriend(userid, x.friend_id, x.friendName, false, addfrienddb); setrefresh(!refresh); }} > Remove friend ! </button>
+                {x.status ? <button class="small-button" onClick={() => { confirmFriend(userid, x.friend_id, x.friendName, false, addfrienddb); setrefresh(!refresh); }} > Remove friend ! </button>
                   : <button class="small-button" onClick={() => { confirmFriend(userid, x.friend_id, x.friendName, true, addfrienddb); setrefresh(!refresh); }} > Cancel request</button>
                 }
               </div>
@@ -274,7 +270,7 @@ function Home() {
           <div class="friends_card">
           </div>
         </div>
-     
+
       </section>
 
     )
@@ -331,7 +327,9 @@ function Home() {
   // if detailed button is clicked //
   if (detailed) {
     return (
+
       <div class="body">
+        <ResponsiveAppBar accounthandle={setaccount} />
         <div class='new-post-det'>
           {
             // if modify is clicked //
@@ -350,7 +348,7 @@ function Home() {
               : (
                 <div>
                   <h2 class="card-heading"> {currentpost.activity}</h2>
-          
+
                 </div>
               )
           }
@@ -371,7 +369,7 @@ function Home() {
                   {currentpost.detail}
                 </h6>)
           }
-         
+
 
           {modify ? (
             <img src="" id="preview" alt=" "></img>
@@ -380,13 +378,17 @@ function Home() {
               <img src={"/Images/" + currentpost.image + ".png"} alt=" "></img>
             )
           }
-      
+
 
           {modify ? (
             <Button variant="contained" onClick={() => {
               sendFilenoimage(
                 document.getElementById('activity').value,
                 document.getElementById('activitydetail').value, currentpost._id);
+
+                setmodify(false);
+                setdetailed(false);
+      
               setsavetext("changed saved");
             }} >Save changes
 
@@ -398,18 +400,18 @@ function Home() {
             )}
 
           {modify ? (
-            <> 
-            <Button variant="contained" type="submit" onClick={() => (document.getElementById('image').click())} >
-              <input hidden type="file" onChange={handlepreview} name="image" id="image" />Modify Image
-            </Button>
-            
-            <Button variant="contained" onClick={() => { setdetailed(false); setmodify(false); }} >
-            Back
-          </Button>
+            <>
+              <Button variant="contained" type="submit" onClick={() => (document.getElementById('image').click())} >
+                <input hidden type="file" onChange={handlepreview} name="image" id="image" />Modify Image
+              </Button>
 
-          </>
-            
-            )
+              <Button variant="contained" onClick={() => { setdetailed(false); setmodify(false); }} >
+                Back
+              </Button>
+
+            </>
+
+          )
             :
             (
               frienddataview || viewcurrentfrienduserdata ?
@@ -432,7 +434,7 @@ function Home() {
                   </Button>
 
 
-           
+
                 </>
             )
           }
@@ -442,64 +444,55 @@ function Home() {
     )
   }
   return (
-    <>
 
+    <>
+  <section class ="layout">
       <div class="header-top">
         <ResponsiveAppBar accounthandle={setaccount} />
         <Typography variant="h5" gutterBottom>
           Welcome hdhd {usernm.displayName} !
         </Typography>
       </div>
+      </section>
 
       <div class="body">
-  
+
         <div class="new-activity-card">
           <input type="text" readOnly class="new-text-box" value="Enter new activity ?" onClick={() => setnewtask(true)} />
         </div>
 
 
         <Buttonmenu
-            setfrienddataview={setfrienddataview}
-            setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
-            viewcurrentfrienduserdata={viewcurrentfrienduserdata}
-     
-            setfriends={setfriends}
-            setviewfriends={setviewfriends}
-            setviewfriendrequests={setviewfriendrequests}
-          >
-          </Buttonmenu>
+          setfrienddataview={setfrienddataview}
+          setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
+          viewcurrentfrienduserdata={viewcurrentfrienduserdata}
 
-        <div class="content-buffer">        {viewcurrentfrienduserdata ?  <h1 class="card-heading-user"> "Only Profile of " {friendsdata[0].displayName} </h1> : <> </>}
-        {!viewcurrentfrienduserdata & !frienddataview ?  <h1 class="card-heading-user"> "Profile of " {usernm.displayName} </h1> : <> </>}
-        {/* {frienddataview ?  <h1 class="card-heading-user"> "Friends of " {usernm.displayName}  - showing friends of Testuser001 for Demo purposes but would otherwise show friends of current user only</h1> : <> </>}  */}
-        
+          setfriends={setfriends}
+          setviewfriends={setviewfriends}
+          setviewfriendrequests={setviewfriendrequests}
+        >
+        </Buttonmenu>
+
+        <div class="content-buffer">        {viewcurrentfrienduserdata ? <h1 class="card-heading-user"> "Only Profile of " {friendsdata[0].displayName} </h1> : <> </>}
+          {!viewcurrentfrienduserdata & !frienddataview ? <h1 class="card-heading-user"> "Profile of " {usernm.displayName} </h1> : <> </>}
         </div>
 
         {frienddataview ?
-
           friendsdata.map((post) => (
-
             <>
-
-sgsgsgsg 
-            <Activity
-            
-              label={"friends data "}
-              post={post}
-              setdetailed={setdetailed}
-              setcurrentfrienduserdata={setcurrentfrienduserdata}
-              setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
-              setfrienddataview={setfrienddataview}
-              getdatafromlistbyuid={getdatafromlistbyuid}
-              friendsdata={friendsdata}
-
-            > </Activity> </>
+              <Activity
+                label={"friends data "}
+                post={post}
+                setdetailed={setdetailed}
+                setcurrentfrienduserdata={setcurrentfrienduserdata}
+                setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
+                setfrienddataview={setfrienddataview}
+                getdatafromlistbyuid={getdatafromlistbyuid}
+                friendsdata={friendsdata}
+              > </Activity> </>
           ))
           :
           (viewcurrentfrienduserdata ? currentfrienduserdata.map((post) => (
-
-            <>
-aaaaaaaaa
             <Activity
               label={"current friends data "}
               post={post}
@@ -511,32 +504,23 @@ aaaaaaaaa
               getdatafromlistbyuid={getdatafromlistbyuid}
               friendsdata={friendsdata}
               userpage={false}
-            > </Activity> </>
+            > </Activity>
           )) : userdata.map((post) => (
-
-            <>
-              <Activity
-                label={"profile data "}
-                post={post}
-                setdetailed={setdetailed}
-                setcurrentpost={setcurrentpost}
-
-                setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
-                setfrienddataview={setfrienddataview}
-                getdatafromlistbyuid={getdatafromlistbyuid}
-                friendsdata={friendsdata}
-                userpage={true}
-              > </Activity>
-
-            </>
+            <Activity
+              label={"profile data "}
+              post={post}
+              setdetailed={setdetailed}
+              setcurrentpost={setcurrentpost}
+              setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
+              setfrienddataview={setfrienddataview}
+              getdatafromlistbyuid={getdatafromlistbyuid}
+              friendsdata={friendsdata}
+              userpage={true}
+            > </Activity>
           ))
-
           )
-
         }
       </div>
-
-
     </>
   );
 }

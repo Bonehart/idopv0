@@ -31,12 +31,19 @@ function Newuser() {
 
     {
       if (password == password2 && isValid == false){
+        console.log(" regex pw");
+        console.log(password);
+  
         setpassworderror("match");
         setisValid(true);
       }
     }
 
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    // var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*/])(?=.{8,})");
+
+
+
 
     if (strongRegex.test(password) == true && strongRegexpass == false){
       setstrongRegexpass(true);
@@ -45,6 +52,8 @@ function Newuser() {
 
     if (strongRegex.test(password) == false && strongRegexpass == true){
       setstrongRegexpass(false);
+      console.log("failed regex");
+      console.log(password);
 
     }
 
