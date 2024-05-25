@@ -93,8 +93,6 @@ const getFriends = async (user, hookVar,friendrequestshook) => {
             });
 
             console.log("now running friend IDS" + friendids);
-
-
             const friendsDataRef = collection(db, "users");
 
             // bring back user data for friends, but not the data of the user //
@@ -117,22 +115,28 @@ const getFriends = async (user, hookVar,friendrequestshook) => {
 
           try{
 
+            console.log("now running friend request data");
             const r = query(friendsRef, where("friend_id", "==", user), where("status", "==", false));
             const querySnapshot3 = await getDocs(r);
+            console.log("friend_id from user is ");
+            console.log(user);
+
+          
+            console.log("friend request data is");
+            console.log(querySnapshot3);
 
             querySnapshot3.forEach((doc) => {
-
-
               friendrequestData.push(doc.data());
             });
 
           } catch(e) {
-            console.log("something went wrong getting friend requets");
+            console.log("something went wrong getting friend requests");
+
+            console.log(e);
           }
 
           hookVar(friendList);
           friendrequestshook(friendrequestData);
-
 };
 
 
@@ -184,7 +188,7 @@ const addFriend = async (user, friend, hookvar, refresh,friendName,userName  ) =
 
   console.log("friendName name is ");
   console.log(friendName);
-  // const datab = getDatabase();
+ 
   addDoc(collection(db, "friends"), {
     user: user,
     friend_id: friend,
@@ -198,6 +202,25 @@ const addFriend = async (user, friend, hookvar, refresh,friendName,userName  ) =
   hookvar(!refresh);
 
 };
+
+
+
+const addFrienddummy = async (user, friend, friendName,userName  ) => {
+
+  console.log("friendName name is ");
+  console.log(friendName);
+ 
+  addDoc(collection(db, "friends"), {
+    user: user,
+    friend_id: friend,
+    friendName: friendName,
+    userName: userName,
+    status: true
+  });
+
+
+};
+
 
 const confirmFriend = async (user, friend, friendName,username,setting,dbfunc) => {
 
@@ -277,6 +300,24 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     await updateProfile(auth.currentUser, { displayName: name }).catch(
       (err) => console.log(err)
     );
+    console.log("name for reg user add friend is ");
+    console.log(name);
+    // make it so that when you register test user adds you as a friend//
+    // addfrienddb()
+
+    addDoc(collection(db, "friends"), {
+      user:"mKYLcOh65YcXdqNMb5l0l7FPv3J3",
+      friend_id:  user.uid ,
+      friendName: name,
+      userName: "Testuser001" ,
+      status: false
+    });
+
+
+    //  await addfrienddb(user.uid, "mKYLcOh65YcXdqNMb5l0l7FPv3J3",name,"Testuser001").catch(
+    //    (err) => console.log("error with add friend" + err)
+    //  );
+
 
 
   } catch (err) {
@@ -324,4 +365,4 @@ const checkauth = async (email, password) => {
 
 };
 
-export { app, checkauth, logOut, resetpw, addFriend, getuserinfoData, getFriends, confirmFriend, registerWithEmailAndPassword, logInWithEmailAndPassword, getUsers };
+export { app, checkauth, logOut, resetpw, addFriend, addFrienddummy,getuserinfoData, getFriends, confirmFriend, registerWithEmailAndPassword, logInWithEmailAndPassword, getUsers };

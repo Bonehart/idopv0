@@ -32,7 +32,7 @@ async function submitfriend(data, model) {
     console.log(docs[0].username);
 };
 
-router.post("/addfriend", checkIfAuthenticated, function(req, res, next) {
+router.post("/addfriend", function(req, res, next) {
     console.log("Adding new friend...back end..");
 
       const uid = req.body.uid;

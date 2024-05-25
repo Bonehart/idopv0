@@ -27,9 +27,14 @@ import { ModifyButtonmenu } from './components/ModifyButtonmenu.js';
 import postactivity from "./postactivity";
 import TextField from '@mui/material/TextField';
 
+import { server } from "./server.js"
+
+
 import ResponsiveAppBar from './components/Toolbar.js';
 
 const auth = getAuth();
+
+
 
 function Home() {
 
@@ -122,7 +127,7 @@ function Home() {
   if (!usernm) {
     return (
       < div>         <p> Please login :  </p>
-        <Link to="/Login"> Login </Link>
+        <Link to="/"> Login </Link>
       </div>
     )
   }
@@ -450,7 +455,7 @@ function Home() {
       <div class="header-top">
         <ResponsiveAppBar accounthandle={setaccount} />
         <Typography variant="h5" gutterBottom>
-          Welcome hdhd {usernm.displayName} !
+          Welcome hdhd {usernm.displayName} ! {server.server}
         </Typography>
       </div>
       </section>

@@ -6,6 +6,7 @@ import  './css/login.css';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {registerWithEmailAndPassword} from "./Firebase.js"
 import ResponsiveAppBar from './components/Toolbar.js';
+import { getuserData, sendFilenoimage, deletedatabyid, deleteimagebyid, handlepreview, addfrienddb, getfriendsdata, getdatafromlistbyuid, handleImageError } from "./useractions";
 
 function Newuser() {
 
@@ -39,10 +40,7 @@ function Newuser() {
       }
     }
 
-    // var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*/])(?=.{8,})");
-
-
 
 
     if (strongRegex.test(password) == true && strongRegexpass == false){

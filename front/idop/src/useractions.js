@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
 import { logInWithEmailAndPassword, logOut,getFriends } from './Firebase';
 import firebase from 'firebase/compat/app';
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import { server } from "./server.js"
 
 export async function addfrienddb(uid, friend_uid,friendName,userName) {
   var myHeaders = new Headers();
@@ -24,7 +24,7 @@ export async function addfrienddb(uid, friend_uid,friendName,userName) {
     redirect: 'follow'
   };
   
-  fetch("http://172.105.254.65:9000/addfriend/addfriend", requestOptions)
+  fetch(server+ ":9000/addfriend/addfriend", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
@@ -38,7 +38,7 @@ export function handleImageError(img) {
 
 
  export async function getuserData(hookVar, user, token,hookload) {
-     var apiUrl =  new URL('http://172.105.254.65:9000/getactivities');
+     var apiUrl =  new URL(server+':9000/getactivities');
      var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer "  + token);
       myHeaders.append('Content-Type', 'application/json');
@@ -74,7 +74,7 @@ export function handleImageError(img) {
     };
 
     try {
-        let response = await fetch("http://172.105.254.65:9000/getactivities/getfriendsdata?" + params, requestOptions);
+        let response = await fetch(server + ":9000/getactivities/getfriendsdata?" + params, requestOptions);
         response = await response.json();
         console.log("response is : ");
         console.log(response);
@@ -122,7 +122,7 @@ export async function getdatafromlistbyuid (uid, list, hook, viewhook, viewhook2
 
 // this one will get the data by _id 
   export async function deletedatabyid(id, hookVar) {
-    var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/deletebyid');
+    var apiUrl =  new URL(server+':9000/getactivities/deletebyid');
     var data = { "id" : id};
     for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
     let response = await  fetch(apiUrl)
@@ -134,7 +134,7 @@ export async function getdatafromlistbyuid (uid, list, hook, viewhook, viewhook2
    
 // this one will get the data by _id 
 export async function deleteimagebyid(id, hookVar) {
-  var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/deleteimagebyid');
+  var apiUrl =  new URL(server+':9000/getactivities/deleteimagebyid');
   var data = { "id" : id};
   for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
   let response = await  fetch(apiUrl)
@@ -145,7 +145,7 @@ export async function deleteimagebyid(id, hookVar) {
 
   // this one will get the data by _id 
   export async function getdatabyid(hookVar, id) {
-    var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/getbyid');
+    var apiUrl =  new URL(server+':9000/getactivities/getbyid');
     var data = { "id" : id};
     for (let k in data) { apiUrl.searchParams.append(k, data[k]); }
     let response = await  fetch(apiUrl)
@@ -158,7 +158,7 @@ export async function deleteimagebyid(id, hookVar) {
   export async function updatedata( data) {
 
     try{
-      var apiUrl =  new URL('http://172.105.254.65:9000/getactivities/updatebyid');
+      var apiUrl =  new URL(server+':9000/getactivities/updatebyid');
 
       var id = { "id" : data.id};
       var activity = { "activity" : data.activity};
@@ -211,7 +211,7 @@ export async function deleteimagebyid(id, hookVar) {
       myHeaders.append('Content-Type', 'application/json');
 
       // console.log("didnt detect image");
-      fetch('http://172.105.254.65:9000/getactivities/updatebyid', {
+      fetch(server+':9000/getactivities/updatebyid', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -227,7 +227,7 @@ export async function deleteimagebyid(id, hookVar) {
     myHeaders.append("Authorization", "Bearer "  +  x);
     myHeaders.append('Content-Type', 'application/json');
     
-  fetch('http://172.105.254.65:9000/getactivities/updatebyidimg', {
+  fetch(server+':9000/getactivities/updatebyidimg', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -263,7 +263,7 @@ export async function deleteimagebyid(id, hookVar) {
     // myHeaders.append("Authorization", "Bearer "  +  x);
     // myHeaders.append('Content-Type', 'application/json');
 
-    fetch('http://172.105.254.65:9000/getactivities/updatebyid', {
+    fetch(server+':9000/getactivities/updatebyid', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -279,7 +279,7 @@ export async function deleteimagebyid(id, hookVar) {
 
   export async function sendFile(uid)  {
      console.log("saving/updating image");
-    var apiUrl = 'http://172.105.254.65:9000/getactivities/updateimagebyid';
+    var apiUrl = server+':9000/getactivities/updateimagebyid';
     var keyValue = uid + Date.now();
   // Simple POST request with a JSON body using fetch
 
@@ -301,7 +301,7 @@ export async function deleteimagebyid(id, hookVar) {
 
 
     await fetch(apiUrl, requestOptions).then(
-      fetch('http://172.105.254.65:9000/addimage', {
+      fetch(server+':9000/addimage', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

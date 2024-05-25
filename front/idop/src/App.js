@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+import { server } from "./server.js"
 const firebaseApp = require('./Firebase.js')
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
       >
 
     <p>Welcomme to I Do Prostination</p>
+   {server}
          <Link to="/newuser">Register</Link> |{" "} 
         <Link to="/Login">Login </Link>|{" "}
          <Link to="/Home">Home </Link>  
