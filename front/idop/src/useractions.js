@@ -238,7 +238,7 @@ export async function deleteimagebyid(id, hookVar) {
       // body: JSON.stringify(formDatar)
     body:JSON.stringify( { detail: detail, id: id, activity: activity, image: keyValue.toUpperCase()   })
     }).then(
-      fetch('http://172.105.254.65:9000/addimage', {
+      fetch(server + '/addimage', {
       method: 'POST',
       mode: 'cors',
       body: formData

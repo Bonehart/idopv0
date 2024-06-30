@@ -451,36 +451,29 @@ function Home() {
   return (
 
     <>
-  <section class ="layout">
-      <div class="header-top">
-        <ResponsiveAppBar accounthandle={setaccount} />
-        <Typography variant="h5" gutterBottom>
-          Welcome hdhd {usernm.displayName} ! {server.server}
-        </Typography>
-      </div>
-      </section>
+  <nav class="navbar">
+    <div class="nav-wrapper">
+        <img src="idop.png" class="brand-img" alt="" />
 
-      <div class="body">
+        <div class="nav-items">
+            <img src="add.PNG" class="icon" alt=""/>
+            <img src="home.PNG" class="icon" alt=""/>
 
-        <div class="new-activity-card">
-          <input type="text" readOnly class="new-text-box" value="Enter new activity ?" onClick={() => setnewtask(true)} />
+            <img src="user.png" class="icon" alt=""/>
+            <img src="add-friend-icon.png" class="icon" alt=""/>
+            <img src="friend-requests.png" class="icon" alt=""/>
+            <img src="find-friends.png" class="icon" alt=""/>
+
         </div>
+    </div>
+ 
+    </nav>
 
+    
+<section class="main">
+    <div class="wrapper">
+        <div class="left-col">
 
-        <Buttonmenu
-          setfrienddataview={setfrienddataview}
-          setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
-          viewcurrentfrienduserdata={viewcurrentfrienduserdata}
-
-          setfriends={setfriends}
-          setviewfriends={setviewfriends}
-          setviewfriendrequests={setviewfriendrequests}
-        >
-        </Buttonmenu>
-
-        <div class="content-buffer">        {viewcurrentfrienduserdata ? <h1 class="card-heading-user"> "Only Profile of " {friendsdata[0].displayName} </h1> : <> </>}
-          {!viewcurrentfrienduserdata & !frienddataview ? <h1 class="card-heading-user"> "Profile of " {usernm.displayName} </h1> : <> </>}
-        </div>
 
         {frienddataview ?
           friendsdata.map((post) => (
@@ -525,7 +518,12 @@ function Home() {
           ))
           )
         }
-      </div>
+          
+            </div>
+        </div>
+
+</section>
+  
     </>
   );
 }

@@ -21,33 +21,52 @@ export const Activity = props => {
   }
 
   return (
-    <div className={props.post.image !== "" ? "activity-card" : "activity-card-small"}>
 
-            <div class="activity-card2">
+    <> 
+    
 
-                {props.userpage ?
-                    <h1 class="card-heading-user"> {props.post.displayName}</h1>
-                : 
-            <h1 class="card-heading" onClick={() => {props.getdatafromlistbyuid(props.post.username, props.friendsdata, props.setcurrentfrienduserdata, props.setviewcurrentfrienduserdata, props.setfrienddataview); 
-            // props.setviewfrienduserdata(false); props.setviewcurrentfrienduserdata(true);
-          
-          }}>  
-            {props.post.displayName}</h1>
-}
 
-            <h2 class="card-heading2" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>            {props.post.activity}</h2>
-            <h6 class="card-second-heading">     {preview()}</h6>
 
+    <div class="post">
+    <div class="info">
+        <div class="user">
+        <div class="profile-pic">          
+          </div> 
+
+          {props.userpage ?    <p class="username">  {props.post.displayName}</p> :
+                      <p class="username" onClick={() => {props.getdatafromlistbyuid(props.post.username, props.friendsdata, props.setcurrentfrienduserdata, props.setviewcurrentfrienduserdata, props.setfrienddataview); 
+                      }}>  
+                      hd  {props.post.displayName}</p>
+            }
+           
+        </div>
+    <img src="/option.PNG" class="options" alt=""/> 
     </div>
-    <div class="activity-card2">
+    <img src="/gil-galad.jpg" class="post-image" alt=""/>
+    <div class="post-content">
+        {/* <div class="reaction-wrapper">
+            <img src="img/like.PNG" class="icon" alt=""/>
+            <img src="img/comment.PNG" class="icon" alt=""/>
+            <img src="img/send.PNG" class="icon" alt=""/>
+            <img src="img/save.PNG" class="save icon" alt=""/>
+        </div>  */}
+
+        <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
+        <span>{props.post.activity} </span> </p>
+
+        <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
+
+       {preview()}    </p>
      
-      <img class="card-third-div" src={"/Images/" +  props.post.image + ".png"} alt =""  onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
-
-      </img>
+        <p class="post-time">2 minutes ago</p>
     </div>
-
-  </div>
-
+    <div class="comment-wrapper">
+        <img src="/friend-requests.png" class="icon" alt=""/>
+        <input type="text" class="comment-box" placeholder="Add a comment" />
+        <button class="comment-btn">post</button>
+    </div>
+    </div>
+</>
   )
 
 }

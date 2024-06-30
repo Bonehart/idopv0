@@ -1,0 +1,603 @@
+/* css for account page */
+/* css for account page */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.regcontainer {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 400px;
+}
+
+
+.container {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.account-card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+  padding: 20px;
+  width: 400px;
+}
+.card h2 {
+  margin-top: 0;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.form-group p {
+
+  /* padding: 5px; */
+  width: 100%;
+}
+.form-group button {
+  background-color: blue; 
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  /* padding: 8px 16px; */
+}
+.form-group button:hover {
+  background-color: #3e8e41;
+}
+
+/*end css for account page */
+.small-button {
+  width: 100px;
+}
+
+
+body {
+  font-family: Arial;
+  align-items: center;
+  justify-content: center;
+  /* display: flex; */
+}
+
+input[type=text],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+input[type=submit] {
+  width: 100%;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* div.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border: solid .5px;
+} */
+
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.inputRounded .MuiOutlinedInput-root {
+  border-radius: 20px;
+}
+
+.activity-card {
+  background-color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  /* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0.2, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);   */
+  box-shadow: 0px 3px 2px -2px rgba(0, 0, 0, 0.8), 
+  0px 1px 1px 0px rgba(0, 0, 0, 0.6), 
+  0px 1px 3px 0px rgba(0, 0, 0, 0.8);
+
+  /* box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.8); */
+
+  overflow: hidden;
+  margin: 16px;
+  /* height: 810px; */
+  /* width: 1080px; */
+  width: 80%;
+
+  /* display: flex;
+  flex-direction: column; */
+}
+
+
+
+.activity-card-small {
+  background-color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  /* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0.2, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);   */
+  box-shadow: 0px 3px 2px -2px rgba(0, 0, 0, 0.8), 
+  0px 1px 1px 0px rgba(0, 0, 0, 0.6), 
+  0px 1px 3px 0px rgba(0, 0, 0, 0.8);
+
+  /* box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.8); */
+
+  overflow: hidden;
+  margin: 16px;
+  height: 210px;
+  /* width: 1080px; */
+   width:  80%; 
+
+
+  /* display: flex;
+  flex-direction: column; */
+}
+
+
+.new-activity-card {
+  padding: 16px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 60px;
+  width:35%;
+
+}
+
+
+
+
+
+
+.activity-card2 {
+  /* padding: 16px; */
+  padding: 5%;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+
+
+}
+
+
+.card-heading {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 2.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+
+.card-heading-user {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 2.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+.card-third-div{
+  text-decoration: underline;
+  cursor: pointer; 
+}
+
+.card-heading:hover, .card-heading2:hover {
+  text-decoration: underline;
+  cursor: pointer; 
+}
+
+
+.card-second-heading {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.card-heading-third {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: 0.00938em;
+  color: #1976d2;
+  display: block;
+  margin-top: 12px;
+}
+
+.card-second-div {
+  flex: 1;
+}
+
+.card-third-div {
+  overflow: hidden;
+}
+
+
+.new-text-box {
+  background-color: red;
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentColor;
+  border: 0;
+  box-sizing: content-box;
+  background: none;
+  margin: 1vh;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 0;
+  width: 95%; 
+  -webkit-animation-name: mui-auto-fill-cancel;
+  animation-name: mui-auto-fill-cancel;
+  -webkit-animation-duration: 10ms;
+  animation-duration: 10ms;
+   padding: 16.5px 14px; 
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  background-color: lightgray;
+}
+
+
+
+.new-text-box2 {
+  background-color: red;
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentColor;
+  margin-top: 2px;
+
+  border: 0;
+  box-sizing: content-box;
+  background: none;
+
+
+  -webkit-tap-highlight-color: transparent;
+
+  min-width: 0;
+  width: 380px;
+  -webkit-animation-name: mui-auto-fill-cancel;
+  animation-name: mui-auto-fill-cancel;
+  -webkit-animation-duration: 10ms;
+  animation-duration: 10ms;
+  height: 25px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: solid 1px;
+
+
+}
+
+.new-text-box3 {
+  background-color: red;
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentColor;
+
+  border: 0;
+  box-sizing: content-box;
+  background: none;
+  margin-top: 25px;
+
+  -webkit-tap-highlight-color: transparent;
+
+  min-width: 0;
+  width: 380px;
+  -webkit-animation-name: mui-auto-fill-cancel;
+  animation-name: mui-auto-fill-cancel;
+  -webkit-animation-duration: 10ms;
+  animation-duration: 10ms;
+  height: 550px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: solid 1px;
+
+
+}
+
+
+.new-text {
+
+  width: 200px;
+}
+
+.new-post {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  margin: 16px;
+  /* height: 700px; */
+  height: 55%;
+  /* width: 700px; */
+
+
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+/* Media query for screens between 600px and 900px */
+@media screen and (min-width: 460px)  {
+  .new-post {
+  width: 700px; 
+
+  }
+  .button-container {
+
+    width: 400px;
+    height: 100px;
+  
+  }
+
+  .image-button {
+
+    width: 75px; /* Fill the entire div */
+
+  }
+
+  
+
+}
+
+/* Media query for screens between 600px and 900px */
+@media screen and (min-width: 100px) and (max-width: 459px) {
+  .new-post {
+    width: 85%;
+  }
+
+  .image-button {
+
+    width: 50px; /* Fill the entire div */
+
+  }
+
+
+  
+.new-activity-card {
+ 
+  width:75%;
+
+}
+
+.button-container {
+
+  height: 75px;
+  width: 300px;
+
+}
+
+
+
+
+}
+
+.new-post-det {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  margin: 16px;
+/* 
+  min-height: 700px; */
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.image-button:focus{
+
+  background-color: lightgrey;
+}
+
+
+.layout button {
+
+  width: 150px;
+}
+/* .layout { */
+  /* width: 1366px;
+  height: 768px;  */
+
+  /* display: grid;
+  grid: */
+    /* "header-top header-top header-top" auto "header header header" auto "leftSide body rightSide" 1fr "footer footer footer" auto / auto 1fr auto; */
+  /* gap: 8px; */
+/* }
+  */
+
+img[src=""] {
+  display: none;
+}
+
+
+.header-top {
+  /* grid-area: header-top; */
+  /* height: 200px; */
+   /* border: solid 1px;  */
+   width: 100%;
+}
+
+.header {
+  grid-area: header;
+  height: 10px;
+  /* border: solid 1px; */
+}
+
+.leftSide {
+   grid-area: leftSide; 
+  /* width: 100vw; */
+  /* width: 500px; */
+  /* border: solid 1px; */
+}
+
+.body {
+  grid-area: body;
+  align-items: center;
+  justify-content: center;
+  /* border: solid 1px; */
+  /* width: 920px; */
+  display: flex;
+  flex-direction: column;
+}
+
+.rightSide {
+  grid-area: rightSide;
+  width: 100vw;
+  /* width: 500px; */
+  /* border: solid 1px; */
+}
+
+.footer {
+  grid-area: footer;
+  height: 100px;
+  /* border: solid 1px; */
+}
+
+.svg-button {
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  background-image: url('./../../public/friends.svg');
+  /* Adjust background size and other properties as needed */
+}
+
+.button-container {
+  display: flex;
+   /* width: 600px; */
+  /* height: 150px;  */
+}
+
+
+.button-container div {
+
+  height: 60%;
+}
+
+
+.button-container-modify {
+   display: flex;
+   flex-direction: row;
+  /* width: 50%; */
+  /* height: 100px; */
+  align-items: center;
+  justify-content: center;
+   
+  /* margin-left: auto; 
+  margin-right: auto;  */
+}
+
+
+
+
+.button-container div {
+  flex: 1; /* Makes all child divs the same size */
+  background-color: white; /* Optional background color */
+  /* margin: 5px; */
+  border: solid 1px;
+  border-color: white;
+}
+
+
+
+
+.image-button  img, .image-button-modify img {
+  /* width: 80%; */
+  height: 60%; /* Ensure images maintain aspect ratio */
+  object-fit: contain; /* Cover entire button area while preserving aspect ratio */
+}
+
+
+.image-button {
+  border: none;
+  border-radius: 50%; /* Make buttons circular */
+  background-color: #eee; /* Optional background color */
+  padding: 0; /* Remove default button padding */
+
+
+  height:100%;
+  cursor: pointer; /* Add a pointer for interactivity */
+  object-fit: contain;
+}
+
+.image-button-modify {
+  border: none;
+  border-radius: 50%; /* Make buttons circular */
+  background-color: #eee; /* Optional background color */
+  padding: 0; /* Remove default button padding */
+  width: 100px; /* Fill the entire div */
+  height:100%; /* Set button height (adjust as needed) */
+
+  cursor: pointer; /* Add a pointer for interactivity */
+  object-fit: contain;
+}
+
+
+
+.test-div{
+
+background-color:red; 
+height: 200px;
+
+}
+
+
+.description-box {
+  margin-top: 5px;
+  
+  /* Add styles for the description box */
+}
+
+.button-wrapper {
+  text-align: center;
+
+}
+
+.content-buffer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}

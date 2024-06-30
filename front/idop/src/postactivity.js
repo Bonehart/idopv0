@@ -1,6 +1,8 @@
+
+import { server } from "./server.js"
 export async function postactivity(tokenid, userid, activity, detail, displayName) {
 
-  var apiUrl = 'http://172.105.254.65:9000/newactivity';
+  var apiUrl = server + ':9000/newactivity';
   var myHeaders = new Headers();
   var imageString;
   myHeaders.append("Authorization", "Bearer" + " " + tokenid);
@@ -40,7 +42,7 @@ export async function postactivity(tokenid, userid, activity, detail, displayNam
       formData.append('displayName', displayName);
 
       await fetch(apiUrl, requestOptions).then(
-        fetch('http://172.105.254.65:9000/addimage', {
+        fetch(server + ':9000/addimage', {
           method: 'POST',
           mode: 'cors',
 
