@@ -24,13 +24,9 @@ export const Newactivity = props => {
     const fileField = document.querySelector('input[type="file"]');
     formData.append('image', fileField.files[0]);
     formData.append('user', props.uid);
-
-    console.log(fileField.files[0]);
-
     fetch('http://localhost:9000/addimage', {
       method: 'POST',
       mode: 'cors',
-
       body: formData
     })
       ;
@@ -38,9 +34,7 @@ export const Newactivity = props => {
 
   return (
     <div class="body">
-
       <div class = 'new-post'> 
-
       <h2 class="card-heading">            Today's Activity</h2>
       <input type="text" class="new-text-box2" onChange={props.onchange} placeholder="New Activity Title"  id="fname" name="fname"></input>
       <TextField  style ={{width: '100%'}}
@@ -59,9 +53,6 @@ export const Newactivity = props => {
               <Button variant="contained" onClick={props.back} >
                 Back
               </Button>
-
-   
-
       </div>
     
     </div>

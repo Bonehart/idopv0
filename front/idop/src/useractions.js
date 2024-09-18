@@ -192,6 +192,65 @@ export async function deleteimagebyid(id, hookVar) {
   }
 
 
+
+  
+  export async function updatepost (activity, detail, id)  {
+
+
+    var formData = new FormData();
+  
+    var keyValue = id + Date.now();
+    formData.append('key',keyValue.toUpperCase());
+
+    formData.append('user', id);
+    const x = sessionStorage.getItem("token");
+
+
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer "  +  x);
+      myHeaders.append('Content-Type', 'application/json');
+
+      // console.log("didnt detect image");
+      fetch(server+':9000/getactivities/updatebyid', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+  
+        // body: JSON.stringify(formDatar)
+      body:JSON.stringify( { detail: detail, id: id, activity: activity})
+       });
+
+}
+  
+export async function updateimagemodify (activity, detail, id)  {
+
+    var formData = new FormData();
+
+    var keyValue = id + Date.now();
+    formData.append('key',keyValue.toUpperCase());
+
+    formData.append('user', id);
+    const x = sessionStorage.getItem("token");
+
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "  +  x);
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(server+':9000/getactivities/updatebyid', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+
+    body:JSON.stringify( { detail: detail, id: id, activity: activity})
+     });
+
+}
+
   export async function sendFilenoimage (activity, detail, id)  {
 
     const fileField = document.querySelector('input[type="file"]');
@@ -238,7 +297,7 @@ export async function deleteimagebyid(id, hookVar) {
       // body: JSON.stringify(formDatar)
     body:JSON.stringify( { detail: detail, id: id, activity: activity, image: keyValue.toUpperCase()   })
     }).then(
-      fetch(server + '/addimage', {
+      fetch(server + ':9000/addimage', {
       method: 'POST',
       mode: 'cors',
       body: formData
@@ -291,14 +350,12 @@ export async function deleteimagebyid(id, hookVar) {
     body: JSON.stringify({ username: uid,  image: keyValue.toUpperCase() })
   };
 
-
     const formData = new FormData();
     const fileField = document.querySelector('input[type="file"]');
+
     formData.append('key',keyValue.toUpperCase());
     formData.append('image', fileField.files[0]);
     formData.append('user', uid);
-
-
 
     await fetch(apiUrl, requestOptions).then(
       fetch(server+':9000/addimage', {
@@ -313,7 +370,6 @@ export async function deleteimagebyid(id, hookVar) {
     })
      );
   }
-
 
   function setHeader(time) {
     let message;
@@ -341,4 +397,4 @@ export async function deleteimagebyid(id, hookVar) {
 
   
 
-  export default {getuserData,sendFilenoimage,sendtestimage, addfrienddb,deletedatabyid,sendFile,getdatafromlistbyuid,setHeader,toggleMenu,handleImageError}
+  export default {getuserData,sendFilenoimage,sendtestimage, addfrienddb,deletedatabyid,sendFile,getdatafromlistbyuid,setHeader,toggleMenu,handleImageError,updatepost}

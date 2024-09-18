@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, createContext,useEffect } from "react";
 // import {  Routes, Route } from "react-router-dom";
 import './css/login.css';
 import './css/home.css';
@@ -12,7 +12,7 @@ import { Database, getDatabase } from "firebase/database";
 import { app, logInWithEmailAndPassword, logOut, resetpw, addFriend, getuserinfoData, getFriends, confirmFriend, getUsers } from './Firebase'
 
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getuserData, sendFilenoimage, deletedatabyid, deleteimagebyid, handlepreview, addfrienddb, getfriendsdata, getdatafromlistbyuid, handleImageError } from "./useractions";
+import { getuserData, sendFilenoimage, deletedatabyid, deleteimagebyid, handlepreview, addfrienddb, getfriendsdata, getdatafromlistbyuid, handleImageError,updatepost } from "./useractions";
 
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -21,23 +21,26 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Newactivity } from './components/Newactivity.js';
 import { ChangeTextButton } from './components/ChangeTextButton.js';
+import { DetailedMenu } from './components/DetailedMenu.js';
+import { ModifyActivityField } from './components/ModifyActivityField.js';
 import { Activity } from './components/Activity.js';
 import { Buttonmenu } from './components/Buttonmenu.js';
 import { ModifyButtonmenu } from './components/ModifyButtonmenu.js';
+import { Detailed } from './components/Detailed.js';
+import { Modify } from './components/Modify.js';
+import { NavBar } from './components/NavBar.js';
 import postactivity from "./postactivity";
 import TextField from '@mui/material/TextField';
-
 import { server } from "./server.js"
-
-
 import ResponsiveAppBar from './components/Toolbar.js';
+import { useThemeProps } from "@mui/material";
+import { PageContext } from './PageContext.js';
+
 
 const auth = getAuth();
 
-
-
 function Home() {
-
+  const [hamburger, sethamburger] = useState(false);
   // hooker to get user info - rename this
   const [usernm] = useAuthState(auth);
 
@@ -69,9 +72,9 @@ function Home() {
   const [friendlist, setfriendlist] = useState(" ");
 
   //////////////////////////////// used to control page flow////////////////////
-  const [modify, setmodify] = useState(false);
+
   // used to determine if the detailed view component should be displayed //
-  const [detailed, setdetailed] = useState(false);
+
   // used to determine if the account view component should be displayed //
   const [account, setaccount] = useState(false);
   const [loggedout, setloggedout] = useState(false);
@@ -85,14 +88,19 @@ function Home() {
   const [AddFriendButtonText, setAddFriendButtonText] = useState("Add Friend");
 
   ///////////////////////////////////////////////////////////////////////////
+  /* this stuff calls on state change to the firebase login info */
   // used to set the users friends from the firebase call
   const [userfriends, setuserfriends] = useState("");
   // text to display that changs have been saved
   const [savetext, setsavetext] = useState("");
-  const [deleted, setdeleted] = useState(false);
   const [viewfriends, setviewfriends] = useState(false);
   const [friendsdata, setfriendsdata] = useState(["empty"]);
   const [frienddataview, setfrienddataview] = useState(false);
+
+//for the detailed page//
+  const [detailed, setdetailed] = useState(false);
+  const [modify, setmodify] = useState(false);
+  const [deleted, setdeleted] = useState(false);
 
   // react hook re-load data when key hooks are modified //
   useEffect(() => {
@@ -101,11 +109,8 @@ function Home() {
       if (userlog) {
         getIdToken(userlog).then((idToken) => {
           setuserid(userlog.uid);
-
           settokenid(idToken);
-
           sessionStorage.setItem("token", idToken);
-
           getuserData(setuserdata, userlog.uid, idToken, setloadingvar);
           getFriends(userlog.uid, setfriendlist, setfriendrequestslist);
           getUsers(setuserslist, setloadingvar, userlog.uid);
@@ -123,6 +128,9 @@ function Home() {
 
   }, [tokenid, modify, deleted, loadingvar, account, refresh, frienddataview, viewcurrentfrienduserdata])
 
+  ///////////////////////////////////////////////////////////////////////////
+var navprops = {}
+
   // check if a username is returned if not directer user to login
   if (!usernm) {
     return (
@@ -131,8 +139,6 @@ function Home() {
       </div>
     )
   }
-
-
 
   // check if loading is true and display loading page used for retrieving data ect //
   if (loadingvar) {
@@ -146,21 +152,16 @@ function Home() {
     return <p> is loading auth </p>;
   }
 
-
-
   // if the new task flag is set then return the Newactivity component//
   if (newtask) {
     return <Newactivity
       onchange={e => setactivity(e.target.value)}
       onchangedetail={e => setdetailtext(e.target.value)}
       onclick={() => { postactivity(tokenid, userid, activity, detailtext, usernm.displayName).then(() => {  getuserData(setuserdata, userid, tokenid, setloadingvar, setnewtask);   setnewtask(!newtask);}) }}
-
-
       back={() => { setnewtask(false) }}
       textdetail={detailtext}
     > </Newactivity>
   }
-
 
   // if account button is clicked //
   if (account) {
@@ -190,7 +191,6 @@ function Home() {
         </div>
       </div>
     )
-
   }
 
   //if finding friends
@@ -221,7 +221,8 @@ function Home() {
                     <h3>{x.displayName}</h3>
                     <p>3 mutual friends fsdg</p>
                   </div>
-                  <ChangeTextButton onClick={addFriend} userid={userid} uid={x.uid} setrefresh={setrefresh} refresh={refresh} friendName={x.displayName} userName={usernm.displayName} />
+                  <ChangeTextButton onClick={addFriend} userid={userid} uid={x.uid} setrefresh={setrefresh} 
+                  refresh={refresh} friendName={x.displayName} userName={usernm.displayName} />
 
                 </div>
               }
@@ -316,8 +317,6 @@ function Home() {
               </div>
             </>
           )) : 0}
-
-
           <div class="friends_card">
 
           </div>
@@ -331,149 +330,58 @@ function Home() {
 
   // if detailed button is clicked //
   if (detailed) {
+     return (
+
+      <PageContext.Provider value={{ currentpost,setdetailed,  sethamburger,detailed,  hamburger,  modify,setmodify }}>
+
+      <Detailed     
+        // currentpost ={currentpost}
+        // sethamburger={sethamburger}
+        // hamburger={hamburger}
+        // modify={modify}
+        // setdetailed={setdetailed}
+        // setmodify = {setmodify}
+        // setexampletext = {setexampletext }
+
+      /> 
+  </PageContext.Provider> 
+
+   )
+  }
+
+
+  // if detailed button is clicked //
+  if (modify) {
     return (
 
-      <div class="body">
-        <ResponsiveAppBar accounthandle={setaccount} />
-        <div class='new-post-det'>
-          {
-            // if modify is clicked //
-            modify ? (
-              <section>        <h2 class="card-heading"> Activity title</h2>
+     <PageContext.Provider value={{ currentpost,setdetailed,  sethamburger,detailed,  hamburger,  modify,setmodify }}>
 
-                <TextField style={{ width: '100%', marginBottom: 5, htmlFontSize: 10 }}
-                  id="activity"
-                  variant="outlined"
-                  multiline
-                  minRows={2}
-                  maxRows={5}
-                  placeholder="Enter details about activity"
-                  defaultValue={currentpost.activity} /> </section>
-            )
-              : (
-                <div>
-                  <h2 class="card-heading"> {currentpost.activity}</h2>
+     <Modify     
+       // currentpost ={currentpost}
+       // sethamburger={sethamburger}
+       // hamburger={hamburger}
+       // modify={modify}
+       // setdetailed={setdetailed}
+       // setmodify = {setmodify}
+       // setexampletext = {setexampletext }
 
-                </div>
-              )
-          }
-          {
-            modify ? (
-              <TextField style={{ width: '100%' }}
-                id="activitydetail"
-                variant="outlined"
-                multiline
-                minRows={20}
-                maxRows={2000}
-                placeholder="Enter details about activity"
-                defaultValue={currentpost.detail}
-              />
-            )
-              : (
-                <h6 class="card-second-heading">
-                  {currentpost.detail}
-                </h6>)
-          }
+     /> 
+ </PageContext.Provider> 
 
-
-          {modify ? (
-            <img src="" id="preview" alt=" "></img>
-          ) :
-            (
-              <img src={"/Images/" + currentpost.image + ".png"} alt=" "></img>
-            )
-          }
-
-
-          {modify ? (
-            <Button variant="contained" onClick={() => {
-              sendFilenoimage(
-                document.getElementById('activity').value,
-                document.getElementById('activitydetail').value, currentpost._id);
-
-                setmodify(false);
-                setdetailed(false);
-      
-              setsavetext("changed saved");
-            }} >Save changes
-
-            </Button>
-          )
-            :
-            (
-              " "
-            )}
-
-          {modify ? (
-            <>
-              <Button variant="contained" type="submit" onClick={() => (document.getElementById('image').click())} >
-                <input hidden type="file" onChange={handlepreview} name="image" id="image" />Modify Image
-              </Button>
-
-              <Button variant="contained" onClick={() => { setdetailed(false); setmodify(false); }} >
-                Back
-              </Button>
-
-            </>
-
-          )
-            :
-            (
-              frienddataview || viewcurrentfrienduserdata ?
-                <Button variant="contained" onClick={() => { setdetailed(false); setmodify(false); }} >
-                  Back
-                </Button>
-                :
-                <>
-                  <Button variant="contained" onClick={() => { setmodify(true); }} >
-                    Modify
-                  </Button>
-                  <Button variant="contained" onClick={() => { deletedatabyid(currentpost._id, setdeleted); }} >
-                    Delete
-                  </Button>
-                  <Button variant="contained" onClick={() => { deleteimagebyid(currentpost._id, setdeleted(true)); }} >
-                    Delete Image
-                  </Button>
-                  <Button variant="contained" onClick={() => { setdetailed(false); setmodify(false); }} >
-                    Back
-                  </Button>
+  )
+ }
 
 
 
-                </>
-            )
-          }
-
-        </div>
-      </div>
-    )
-  }
   return (
 
     <>
-  <nav class="navbar">
-    <div class="nav-wrapper">
-        <img src="idop.png" class="brand-img" alt="" />
-
-        <div class="nav-items">
-            <img src="add.PNG" class="icon" alt=""/>
-            <img src="home.PNG" class="icon" alt=""/>
-
-            <img src="user.png" class="icon" alt=""/>
-            <img src="add-friend-icon.png" class="icon" alt=""/>
-            <img src="friend-requests.png" class="icon" alt=""/>
-            <img src="find-friends.png" class="icon" alt=""/>
-
-        </div>
-    </div>
- 
-    </nav>
-
+    <NavBar setnewtask={setnewtask}
+    newtask={newtask}/>
     
 <section class="main">
     <div class="wrapper">
         <div class="left-col">
-
 
         {frienddataview ?
           friendsdata.map((post) => (
@@ -487,6 +395,7 @@ function Home() {
                 setfrienddataview={setfrienddataview}
                 getdatafromlistbyuid={getdatafromlistbyuid}
                 friendsdata={friendsdata}
+                userpage={false}
               > </Activity> </>
           ))
           :
@@ -505,7 +414,7 @@ function Home() {
             > </Activity>
           )) : userdata.map((post) => (
             <Activity
-              label={"profile data "}
+              label={" "}
               post={post}
               setdetailed={setdetailed}
               setcurrentpost={setcurrentpost}
@@ -528,4 +437,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home ;

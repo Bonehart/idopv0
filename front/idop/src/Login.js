@@ -18,9 +18,6 @@ import ResponsiveAppBar from './components/Toolbar.js';
 const auth = getAuth();
 const firebaseApp = require('./Firebase.js')
 
-
-
-
 const handleSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);

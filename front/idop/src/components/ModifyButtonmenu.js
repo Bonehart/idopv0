@@ -20,7 +20,6 @@ export const ModifyButtonmenu = props => {
                 <div class="description-box">Modify </div>
             </div>
 
-
             <div class="button-wrapper">
                 <button class="image-button" onClick={() => { props.onclickmodify(true);}}>
                     <img src="/me.png" alt="Image 5" />

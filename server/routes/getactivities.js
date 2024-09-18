@@ -123,7 +123,7 @@ router.get("/deleteimagebyid",checkIfAuthenticated, function (req, res,next) {
 
 /**** updated by id used for modifying records allows modification of text only  ****/
 /**** modifies the titles of the activity and the detail****/
-router.post("/updatebyid", checkIfAuthenticated,function (req, res,next) {
+router.post("/updatebyid",function (req, res,next) {
 
 
     try{
@@ -142,10 +142,6 @@ console.log("running update by id");
                   res.send("activity modified")
               }
           })
-   
-
-
-
     }
     catch (e)
     {
@@ -156,13 +152,33 @@ console.log("running update by id");
 
 });
 
-router.post("/updatebyidimg", checkIfAuthenticated,function (req, res,next) {
+// router.post("/updatebyidimg", checkIfAuthenticated,function (req, res,next) {
+//     var id_ = req.body.id;
+//     var  activitydata = req.body.activity;
+//     var detail = req.body.detail;
+//     var image = req.body.image;
+
+//    activity.findByIdAndUpdate(id_,{"activity": activitydata, "detail": detail, "image": image}, function(err, result){
+//           if(err){
+//               res.send(err)
+//           }
+//           else{
+//               res.send("activity modified")
+//           }
+//       })
+//       console.log(image);
+// });
+
+router.post("/updatebyidimg",function (req, res,next) {
+    console.log("here");
+
     var id_ = req.body.id;
-    var  activitydata = req.body.activity;
-    var detail = req.body.detail;
     var image = req.body.image;
 
-   activity.findByIdAndUpdate(id_,{"activity": activitydata, "detail": detail, "image": image}, function(err, result){
+   activity.findByIdAndUpdate(id_,
+   {$set: {"image": image} },
+   { new: true }, 
+    function(err, result){
           if(err){
               res.send(err)
           }

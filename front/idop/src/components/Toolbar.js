@@ -29,8 +29,6 @@ function ResponsiveAppBar(props) {
   const [loggedout, setloggedout] = useState(false);
 
   const handleOpenNavMenu = (event) => {
-    // setAnchorElNav(event.currentTarget);
-
 
   };
   const handleOpenUserMenu = (event) => {

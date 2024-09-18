@@ -15,12 +15,12 @@ app.use(express.urlencoded({
   }))
 
 
- app.use(express.static("../public/images"));
+ app.use(express.static("/home/ncrowle/GIT/idop0/idopv0/front/idop/public/Images"));
 
  app.use(fileUpload());
   const storage = multer.diskStorage({
       destination: (req, file, cb) => {
-          cb(null, '/home/idopv0/front/idop/public/Images')
+          cb(null, '/home/ncrowle/GIT/idop0/idopv0/front/idop/public/Images')
       },
       filename: (req, file, cb) => { 
           cb(null,req.body.key  + path.extname(file.originalname))    
