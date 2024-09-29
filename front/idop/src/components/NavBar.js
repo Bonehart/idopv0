@@ -1,9 +1,18 @@
 
-import React from 'react';
+import React, {useContext}  from 'react';
 import ReactDOM from 'react-dom';
+import { PageContext } from '../PageContext.js';
 
 export const NavBar = props => {
- 
+    var {currentpost,
+        setdetailed,
+        sethamburger,
+        detailed,
+        hamburger,
+        modify,
+        setmodify,
+        setnewtask,
+        setinteraction} = useContext(PageContext);
 
     return (
         <nav class="navbar">

@@ -13,7 +13,7 @@ export const ModifyActivityField = props => {
       // if modify is clicked //
       props.modify ? (
         <>        
-        <h2 class="card-heading"> {props.currentpost.activity}</h2>
+        {/* <h2 class="card-heading"> {props.currentpost.activity}</h2> */}
         <textarea   id="activity" 
                 style={{
                   width: '100%', 
@@ -27,8 +27,11 @@ export const ModifyActivityField = props => {
                   font: 'inherit',
                     overflow: 'auto'
         }}>
+
+        
                         {props.currentpost.activity} 
         </textarea>
+
         <textarea   id="activitydetail" 
             
             style={{
@@ -44,11 +47,8 @@ export const ModifyActivityField = props => {
                 overflow: 'auto'
             }}
             >
-
                             {props.currentpost.detail} 
             </textarea>
-
-
             </>
       )
       :(

@@ -21,7 +21,15 @@ export const Detailed = props => {
     const examplefunc = () => {
     }
 
-    var { currentpost,setdetailed, setmodify, sethamburger,detailed, setDetailed, hamburger, setHamburger, modify, setModify } = useContext(PageContext);
+    var {currentpost,
+    setdetailed,
+    sethamburger,
+    detailed,
+    hamburger,
+    modify,
+    setmodify,
+    setnewtask,
+    setinteraction} = useContext(PageContext);
     return (
         <>
 
@@ -29,17 +37,8 @@ export const Detailed = props => {
           <div class = "main-detailed"> 
             <div class = "for-detailed">
               <div className = 'derr1' style={{display:     hamburger == true ? "inline": "none"   }}>
-  
-  
-                <DetailedMenu 
-                // setdetailed = {setdetailed}
-                // setmodify = {setmodify}
-                // sethamburger={sethamburger}
-                // hamburger={hamburger}
-                
-                // setexampletext= {props.setexampletext}
-       
-                />  
+
+                <DetailedMenu  />  
                 </div>
 
                   <div class ="header">        
@@ -55,14 +54,12 @@ export const Detailed = props => {
                             </div>
                             <div class = "inner-content">
 
-                            {/* {currentpost.activity}
-                            {currentpost.detail} */}
+                           
                             <ModifyActivityField 
-                            modify ={modify}
-                            currentpost={currentpost}
-            
-                            // setexampletext = {setexampletext}
-                            /> 
+                              modify ={modify}
+                              currentpost={currentpost}/> 
+               
+                              {currentpost.detail} 
                              
                             </div>
                             <div class = "inner-placeholder">

@@ -7,23 +7,25 @@ export const DetailedMenu = props => {
 
 
 
-const { currentpost,setdetailed, setmodify, sethamburger,detailed, setDetailed, hamburger, setHamburger, modify } = useContext(PageContext);
+  var {currentpost,
+    setdetailed,
+    sethamburger,
+    detailed,
+    hamburger,
+    modify,
+    setmodify,
+    setnewtask,
+    setinteraction} = useContext(PageContext);
 
-
-      var detailedmenuelements = [
-        { Edit: "Edit", hook: props.edit },
-        { Edit: "Back", hook: props.back },
-        { Edit: "Modify Image", hook: props.modify },
-        { Edit: "Delete", hook: props.delete }
-      ];
 
     return (
         <div class="detailed-card-menu">
-  <div class="detailed-menu-item-first"  onClick={() => { setdetailed(false); setmodify(false); sethamburger(!hamburger)  ;}} >
+          
+  <div class="detailed-menu-item-first"  onClick={() => { setdetailed(false); setmodify(false);  setnewtask(false); setinteraction(false); sethamburger(!hamburger)  ;}} >
               Back
   </div> 
   
-  <div class="detailed-menu-item-first"  onClick={() => {  setmodify(true);setdetailed(false); sethamburger(!hamburger); }}  >
+  <div class="detailed-menu-item-first"  onClick={() => {  setmodify(true);setdetailed(false);  sethamburger(!hamburger); }}  >
               Modify
   </div>
 

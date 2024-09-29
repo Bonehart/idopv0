@@ -24,6 +24,7 @@ import { ChangeTextButton } from './components/ChangeTextButton.js';
 import { DetailedMenu } from './components/DetailedMenu.js';
 import { ModifyActivityField } from './components/ModifyActivityField.js';
 import { Activity } from './components/Activity.js';
+import { Interaction } from './components/Interaction.js';
 import { Buttonmenu } from './components/Buttonmenu.js';
 import { ModifyButtonmenu } from './components/ModifyButtonmenu.js';
 import { Detailed } from './components/Detailed.js';
@@ -40,6 +41,9 @@ import { PageContext } from './PageContext.js';
 const auth = getAuth();
 
 function Home() {
+
+
+
   const [hamburger, sethamburger] = useState(false);
   // hooker to get user info - rename this
   const [usernm] = useAuthState(auth);
@@ -101,7 +105,20 @@ function Home() {
   const [detailed, setdetailed] = useState(false);
   const [modify, setmodify] = useState(false);
   const [deleted, setdeleted] = useState(false);
+  const[interaction, setinteraction] = useState(false);
 
+
+  const[context, setcontext] = useState({
+    currentpost,
+    setdetailed,
+    sethamburger,
+    detailed,
+    hamburger,
+    modify,
+    setmodify,
+    setnewtask,
+    setinteraction
+  });
   // react hook re-load data when key hooks are modified //
   useEffect(() => {
 
@@ -115,7 +132,7 @@ function Home() {
           getFriends(userlog.uid, setfriendlist, setfriendrequestslist);
           getUsers(setuserslist, setloadingvar, userlog.uid);
           getfriendsdata(setfriendsdata, userlog.uid, idToken);
-
+        
         },
           (error) => {
             console.log("is no user log");
@@ -126,9 +143,21 @@ function Home() {
     });
 
 
-  }, [tokenid, modify, deleted, loadingvar, account, refresh, frienddataview, viewcurrentfrienduserdata])
+  }, [tokenid, modify, deleted, loadingvar, account, refresh,frienddataview, viewcurrentfrienduserdata,context])
 
-  ///////////////////////////////////////////////////////////////////////////
+
+  const contextValue = {
+    currentpost,
+    setdetailed,
+    sethamburger,
+    detailed,
+    hamburger,
+    modify,
+    setmodify,
+    setnewtask,
+    setinteraction
+  };
+  
 var navprops = {}
 
   // check if a username is returned if not directer user to login
@@ -139,6 +168,18 @@ var navprops = {}
       </div>
     )
   }
+
+  // if the new task flag is set then return the Newactivity component//
+  if (interaction) {    
+    return (  
+<> 
+      <PageContext.Provider value={contextValue}>
+          <Interaction contextValue = {contextValue}> </Interaction>
+  </PageContext.Provider>
+</>
+    ) 
+  }
+
 
   // check if loading is true and display loading page used for retrieving data ect //
   if (loadingvar) {
@@ -152,15 +193,26 @@ var navprops = {}
     return <p> is loading auth </p>;
   }
 
+
+
+
   // if the new task flag is set then return the Newactivity component//
   if (newtask) {
-    return <Newactivity
-      onchange={e => setactivity(e.target.value)}
-      onchangedetail={e => setdetailtext(e.target.value)}
-      onclick={() => { postactivity(tokenid, userid, activity, detailtext, usernm.displayName).then(() => {  getuserData(setuserdata, userid, tokenid, setloadingvar, setnewtask);   setnewtask(!newtask);}) }}
-      back={() => { setnewtask(false) }}
-      textdetail={detailtext}
-    > </Newactivity>
+
+    
+    return (  
+<> 
+      <PageContext.Provider value={contextValue}>
+          <Newactivity
+                onchange={e => setactivity(e.target.value)}
+                onchangedetail={e => setdetailtext(e.target.value)}
+                onclick={() => { postactivity(tokenid, userid, activity, detailtext, usernm.displayName).then(() => {  getuserData(setuserdata, userid, tokenid, setloadingvar, setnewtask);   setnewtask(!newtask);}) }}
+                back={() => { setnewtask(false) }}
+                textdetail={detailtext}
+              > </Newactivity>
+  </PageContext.Provider>
+</>
+    ) 
   }
 
   // if account button is clicked //
@@ -332,19 +384,11 @@ var navprops = {}
   if (detailed) {
      return (
 
-      <PageContext.Provider value={{ currentpost,setdetailed,  sethamburger,detailed,  hamburger,  modify,setmodify }}>
-
-      <Detailed     
-        // currentpost ={currentpost}
-        // sethamburger={sethamburger}
-        // hamburger={hamburger}
-        // modify={modify}
-        // setdetailed={setdetailed}
-        // setmodify = {setmodify}
-        // setexampletext = {setexampletext }
-
-      /> 
-  </PageContext.Provider> 
+      <PageContext.Provider value={contextValue}>
+       <Interaction
+       
+       variant = {"detailed"}/> 
+      </PageContext.Provider> 
 
    )
   }
@@ -354,18 +398,11 @@ var navprops = {}
   if (modify) {
     return (
 
-     <PageContext.Provider value={{ currentpost,setdetailed,  sethamburger,detailed,  hamburger,  modify,setmodify }}>
+     <PageContext.Provider value={contextValue}>
 
-     <Modify     
-       // currentpost ={currentpost}
-       // sethamburger={sethamburger}
-       // hamburger={hamburger}
-       // modify={modify}
-       // setdetailed={setdetailed}
-       // setmodify = {setmodify}
-       // setexampletext = {setexampletext }
+<Interaction
 
-     /> 
+       variant = {"modify"}/> 
  </PageContext.Provider> 
 
   )
@@ -376,8 +413,15 @@ var navprops = {}
   return (
 
     <>
+
+<PageContext.Provider value={contextValue}>
     <NavBar setnewtask={setnewtask}
     newtask={newtask}/>
+ </PageContext.Provider> 
+
+
+
+
     
 <section class="main">
     <div class="wrapper">

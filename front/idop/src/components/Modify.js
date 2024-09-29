@@ -21,7 +21,15 @@ export const Modify = props => {
     const examplefunc = () => {
     }
 
-    var { currentpost,setdetailed, setmodify, sethamburger,detailed, setDetailed, hamburger, setHamburger, modify, setModify } = useContext(PageContext);
+    var {currentpost,
+        setdetailed,
+        sethamburger,
+        detailed,
+        hamburger,
+        modify,
+        setmodify,
+        setnewtask,
+        setinteraction} = useContext(PageContext);
     return (
         <>
 
@@ -30,7 +38,7 @@ export const Modify = props => {
             <div class = "for-detailed">
               <div className = 'derr1' style={{display:     hamburger == true ? "inline": "none"   }}>
   
-
+              afafafafefevc1111111
                 <DetailedMenu 
                 // setdetailed = {setdetailed}
                 // setmodify = {setmodify}
@@ -58,8 +66,7 @@ export const Modify = props => {
 
                             <div class = "inner-placeholder">
                             <Button variant="contained" onClick={() => {
-                                console.log("modified value is : ");
-                                console.log(document.getElementById('activitydetail').value);
+
                                 updatepost(
                                             document.getElementById('activity').value,
                                             document.getElementById('activitydetail').value, currentpost._id);

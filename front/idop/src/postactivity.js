@@ -10,11 +10,15 @@ export async function postactivity(tokenid, userid, activity, detail, displayNam
 
   const fileField = document.querySelector('input[type="file"]');
   var keyValue = userid + Date.now();
+  var extension = fileField[0].type
+
 
   if (fileField.value == "") {
     imageString = "";
   } else {
     imageString = keyValue.toUpperCase();
+    console.log("file extension is  :")
+    console.log(extension);
   }
 
   const requestOptions = {

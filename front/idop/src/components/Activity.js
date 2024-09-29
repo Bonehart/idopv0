@@ -23,12 +23,11 @@ export const Activity = props => {
     <div class="post">
     <div class="info">
         <div class="user">
-        {/* <div class="profile-pic">    
-          /div>  */}
-          {props.userpage ?    <p class="username">  {props.post.displayName}</p> :
+
+          {props.userpage ?    <p class="username">   {props.post.displayName}</p> :
                       <p class="username" onClick={() => {props.getdatafromlistbyuid(props.post.username, props.friendsdata, props.setcurrentfrienduserdata, props.setviewcurrentfrienduserdata, props.setfrienddataview); 
                       }}>  
-                      hd  {props.post.displayName}</p>
+                      {props.post.displayName}</p>
             }
        
         </div>
@@ -49,14 +48,17 @@ export const Activity = props => {
     <img src="/option.PNG" class="options" alt="" /> 
     </div>
 
-    {props.post.image}
+
     <img src={"/Images/" +  props.post.image + ".png"} class="post-image" alt="" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }} />
     <div class="post-content">
 
         <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
         {props.label}
-        <span>{props.post.activity} </span> </p>
+        <span>{props.post.activity} </span>
+        <span>{props.post.activitydetail} </span>
+        </p>
 
+        
         <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
 
        {preview()}    </p>
