@@ -32,8 +32,7 @@ function Newuser() {
 
     {
       if (password == password2 && isValid == false){
-        console.log(" regex pw");
-        console.log(password);
+
   
         setpassworderror("match");
         setisValid(true);
@@ -50,8 +49,7 @@ function Newuser() {
 
     if (strongRegex.test(password) == false && strongRegexpass == true){
       setstrongRegexpass(false);
-      console.log("failed regex");
-      console.log(password);
+
 
     }
 

@@ -58,7 +58,6 @@ const getuserinfoData = async (user, hookVar, hookVar2) => {
 
   }
   catch (e) {
-    console.log("no dice");
     console.log(e);
   }
 };
@@ -74,9 +73,8 @@ const getFriends = async (user, hookVar,friendrequestshook) => {
           var friendids = [];
 
           try {
-            console.log("getting friends for user:" + user);
-
-            //get confirmed friends//
+  
+           //get confirmed friends//
             const q = query(friendsRef, where("user", "==", user), where("status", "==", true) );
             const querySnapshot = await getDocs(q);
 
@@ -84,15 +82,11 @@ const getFriends = async (user, hookVar,friendrequestshook) => {
               friendList.push({ id: doc.id, ...doc.data() });
             });
 
-            console.log("friends list c ame through like the council" );
-            console.log(friendList);
-
             // friendids for use in filtering other queries//
             querySnapshot.forEach((doc) => {
               friendids.push(doc.data().friend_id);
             });
 
-            console.log("now running friend IDS" + friendids);
             const friendsDataRef = collection(db, "users");
 
             // bring back user data for friends, but not the data of the user //
@@ -107,7 +101,6 @@ const getFriends = async (user, hookVar,friendrequestshook) => {
 
           }
           catch (e) {
-            console.log("error in get friends method for some reason");
             console.log(e);
           }
 
@@ -115,23 +108,14 @@ const getFriends = async (user, hookVar,friendrequestshook) => {
 
           try{
 
-            console.log("now running friend request data");
             const r = query(friendsRef, where("friend_id", "==", user), where("status", "==", false));
             const querySnapshot3 = await getDocs(r);
-            console.log("friend_id from user is ");
-            console.log(user);
-
-          
-            console.log("friend request data is");
-            console.log(querySnapshot3);
 
             querySnapshot3.forEach((doc) => {
               friendrequestData.push(doc.data());
             });
 
           } catch(e) {
-            console.log("something went wrong getting friend requests");
-
             console.log(e);
           }
 
@@ -172,9 +156,7 @@ const getUsers = async (hook1, hook2, currentUser) => {
     userQuerySnapshot.forEach((doc) => {
       userList.push({ id: doc.id, ...doc.data() });
     });
-    console.log("users is :");
 
-    console.log(userList);
 
     await hook1(userList);
   } catch (error) {
@@ -186,9 +168,7 @@ const getUsers = async (hook1, hook2, currentUser) => {
 
 const addFriend = async (user, friend, hookvar, refresh,friendName,userName  ) => {
 
-  console.log("friendName name is ");
-  console.log(friendName);
- 
+
   addDoc(collection(db, "friends"), {
     user: user,
     friend_id: friend,
@@ -207,8 +187,6 @@ const addFriend = async (user, friend, hookvar, refresh,friendName,userName  ) =
 
 const addFrienddummy = async (user, friend, friendName,userName  ) => {
 
-  console.log("friendName name is ");
-  console.log(friendName);
  
   addDoc(collection(db, "friends"), {
     user: user,
@@ -265,7 +243,7 @@ const resetpw = async (email) => {
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        console.log("password rest");
+
 
         // Password reset email sent!
         // ..
@@ -300,10 +278,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     await updateProfile(auth.currentUser, { displayName: name }).catch(
       (err) => console.log(err)
     );
-    console.log("name for reg user add friend is ");
-    console.log(name);
-    // make it so that when you register test user adds you as a friend//
-    // addfrienddb()
+
 
     addDoc(collection(db, "friends"), {
       user:"mKYLcOh65YcXdqNMb5l0l7FPv3J3",
@@ -312,12 +287,6 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       userName: "Testuser001" ,
       status: false
     });
-
-
-    //  await addfrienddb(user.uid, "mKYLcOh65YcXdqNMb5l0l7FPv3J3",name,"Testuser001").catch(
-    //    (err) => console.log("error with add friend" + err)
-    //  );
-
 
 
   } catch (err) {

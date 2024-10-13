@@ -62,8 +62,6 @@ export function handleImageError(img) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + token);
     myHeaders.append("Content-Type", "application/json");
-    console.log("user for get friends data is :");
-    console.log(user);
     // Convert parameters to query string if needed
     const params = new URLSearchParams({ username: "mKYLcOh65YcXdqNMb5l0l7FPv3J3" });
 
@@ -76,8 +74,6 @@ export function handleImageError(img) {
     try {
         let response = await fetch(server + ":9000/getactivities/getfriendsdata?" + params, requestOptions);
         response = await response.json();
-        console.log("response is : ");
-        console.log(response);
         // Call your hook function here
         await hookVar(response);
 
@@ -89,11 +85,9 @@ export function handleImageError(img) {
 
 
 export async function getdatafromlistbyuid (uid, list, hook, viewhook, viewhook2){
-  console.log("lidy is : ");
-  console.log(list);
+
   var filtered = list.filter((list) => list.username == uid);
-  console.log("filtereed is : ");
-  console.log(filtered);
+ 
   viewhook(true);
   viewhook2(false);
   hook(filtered);
@@ -210,7 +204,6 @@ export async function deleteimagebyid(id, hookVar) {
       myHeaders.append("Authorization", "Bearer "  +  x);
       myHeaders.append('Content-Type', 'application/json');
 
-      // console.log("didnt detect image");
       fetch(server+':9000/getactivities/updatebyid', {
         method: 'POST',
         headers: {
@@ -268,8 +261,6 @@ export async function updateimagemodify (activity, detail, id)  {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer "  +  x);
       myHeaders.append('Content-Type', 'application/json');
-
-      // console.log("didnt detect image");
       fetch(server+':9000/getactivities/updatebyid', {
         method: 'POST',
         headers: {
@@ -337,7 +328,7 @@ export async function updateimagemodify (activity, detail, id)  {
 
 
   export async function sendFile(uid)  {
-     console.log("saving/updating image");
+
     var apiUrl = server+':9000/getactivities/updateimagebyid';
     var keyValue = uid + Date.now();
   // Simple POST request with a JSON body using fetch

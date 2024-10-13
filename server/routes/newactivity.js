@@ -17,7 +17,6 @@ app.use(express.urlencoded({
 async function submitactivity(data, model,image) {
      await model.create(data);
      const docs = await model.find();
-     console.log(docs[0].username);
 };
 
 router.post("/", checkIfAuthenticated, function(req, res, next) {

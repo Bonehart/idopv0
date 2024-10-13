@@ -87,23 +87,24 @@ export const Newactivity = props => {
                   </div>
   
                 <div class = "test">
-                  New acticity
+                  New activity
                     <div class = "inner-image fill"><img src={"/Images/" +   ".png"}  /> </div>
                         <div class = "inner-things">
                             <div class = "inner-title">
                             </div>
                             <div class = "inner-content">
-
                            
                             <ModifyActivityField 
+                            onchange={props.onchange}
+                            onchangedetail={props.onchangedetail}
                             modify ={true}
                             currentpost={{"activity" : " ", "detailed": "" }}
-                            />  
-                              {/* {currentpost.activity} */}
-                              {/* {currentpost.detail}  */}
-                             
+                            />                               
                             </div>
                             <div class = "inner-placeholder">
+                                       <Button variant="contained"  type="submit"  onClick={()=>(document.getElementById('image').click())} >  <input hidden type="file" name="image" id ="image"/> Image </Button>
+                                 <Button variant="contained" onClick={props.onclick} >Write to time line</Button>
+
                             </div>
                     </div>
               </div>

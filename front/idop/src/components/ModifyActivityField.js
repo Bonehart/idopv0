@@ -26,7 +26,9 @@ export const ModifyActivityField = props => {
                   color: 'inherit',
                   font: 'inherit',
                     overflow: 'auto'
-        }}>
+        }}
+        onChange={props.onchange}
+        >
 
         
                         {props.currentpost.activity} 
@@ -39,13 +41,14 @@ export const ModifyActivityField = props => {
               height: '70%',
               htmlFontSize: 10,
               backgroundColor: 'white',
-      
+           
               outline: 'none',
               resize: 'vertical',
               color: 'inherit',
               font: 'inherit',
                 overflow: 'auto'
             }}
+            onChange={props.onchangedetail}
             >
                             {props.currentpost.detail} 
             </textarea>

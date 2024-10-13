@@ -24,7 +24,7 @@ export const Activity = props => {
     <div class="info">
         <div class="user">
 
-          {props.userpage ?    <p class="username">   {props.post.displayName}</p> :
+          {props.userpage ?    <p class="username">   {props.post.displayName} display name</p> :
                       <p class="username" onClick={() => {props.getdatafromlistbyuid(props.post.username, props.friendsdata, props.setcurrentfrienduserdata, props.setviewcurrentfrienduserdata, props.setfrienddataview); 
                       }}>  
                       {props.post.displayName}</p>
@@ -49,7 +49,7 @@ export const Activity = props => {
     </div>
 
 
-    <img src={"/Images/" +  props.post.image + ".png"} class="post-image" alt="" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }} />
+    <img src={"/Images/" +  props.post.image } class="post-image" alt="" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }} />
     <div class="post-content">
 
         <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
