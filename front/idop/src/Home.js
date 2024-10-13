@@ -397,9 +397,7 @@ var navprops = {}
   // if detailed button is clicked //
   if (modify) {
     return (
-
      <PageContext.Provider value={contextValue}>
-
 <Interaction
 
        variant = {"modify"}/> 
@@ -407,8 +405,6 @@ var navprops = {}
 
   )
  }
-
-
 
   return (
 
