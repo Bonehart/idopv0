@@ -1,13 +1,10 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import Button from '@mui/material/Button';
 import {handleImageError } from "./../useractions";
 import { Threedots } from './Threedots.js';
 
 export const Activity = props => {
-
   const preview = () => {
     try{
       return props.post.detail.split(' ').slice(0, 10).join(' ');
@@ -19,7 +16,6 @@ export const Activity = props => {
 
   return (
     <> 
-    
     <div class="post">
     <div class="info">
         <div class="user">
@@ -43,23 +39,20 @@ export const Activity = props => {
         </svg>
 </div>
 
-
-
     <img src="/option.PNG" class="options" alt="" /> 
     </div>
 
-
-    <img src={"/Images/" +  props.post.image } class="post-image" alt="" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }} />
+    <img src={"/Images/" +  props.post.image } class="post-image" alt="" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) ;}} />
     <div class="post-content">
 
-        <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
+        <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) ;}}>
         {props.label}
         <span>{props.post.activity} </span>
         <span>{props.post.activitydetail} </span>
         </p>
 
         
-        <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post) }}>
+        <p class="description" onClick={() => { props.setdetailed(true);  props.setcurrentpost(props.post); }}>
 
        {preview()}    </p>
      

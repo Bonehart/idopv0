@@ -16,7 +16,7 @@ export async function postactivity(tokenid, userid, activity, detail, displayNam
   if (fileField.value == "") {
     imageString = "";
   } else {
-    imageString = keyValue.toUpperCase() + "."+fileField.value.split('.')[1];;
+    imageString = keyValue.toUpperCase() + "."+fileField.value.split('.')[1];
     console.log("its this ");
     console.log(imageString);
   }
@@ -29,7 +29,7 @@ export async function postactivity(tokenid, userid, activity, detail, displayNam
       activity: activity, 
       detail: detail, 
       displayName: displayName, 
-      image: imageString 
+      image:imageString
     })
   };
 
@@ -38,12 +38,14 @@ export async function postactivity(tokenid, userid, activity, detail, displayNam
   if (fileField.value !== "") {
     try {
       formData.append('username', userid);
-      // formData.append('key', keyValue.toUpperCase());
+
       formData.append('key', keyValue.toUpperCase());
-       formData.append('image', fileField.files[0]);
+
+        formData.append('image', fileField.files[0] );
        formData.append('displayName', displayName);
 
-      console.log(formData);
+       console.log('form data ios ');
+       console.log(formData.entries());
 
       await fetch(server + ':9000/addimage', {
         method: 'POST',

@@ -73,7 +73,7 @@ export const Interaction = (props) => {
           </div>
           <div className="test">
             <div className="inner-image fill">
-              <img src={`/Images/.png`} alt="Activity" />
+              <img src={"/Images/" +  currentpost.image } alt="Activity" />
             </div>
             <div className="inner-things">
               <div className="inner-title">

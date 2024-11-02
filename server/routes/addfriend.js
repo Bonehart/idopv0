@@ -29,11 +29,11 @@ app.use(express.urlencoded({
 async function submitfriend(data, model) {
     await model.create(data);
     const docs = await model.find();
-    console.log(docs[0].username);
+
 };
 
 router.post("/addfriend", function(req, res, next) {
-    console.log("Adding new friend...back end..");
+
 
       const uid = req.body.uid;
       const friend_uid =  req.body.friend_uid;

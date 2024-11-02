@@ -32,7 +32,6 @@ module.exports=  checkIfAuthenticated = (req, res, next) => {
        await getAuth()
         .verifyIdToken(authToken )
         .then((decodedToken) => {
-         console.log("is accessing");
                 return next() 
         })
        } 

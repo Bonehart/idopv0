@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var shortid = require('shortid');
 const multer = require('multer');
 
-
+const path = require('path');
 const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 3000;
 var user = require("../checkauth");

@@ -252,7 +252,8 @@ export async function updateimagemodify (activity, detail, id)  {
   
     var keyValue = id + Date.now();
     formData.append('key',keyValue.toUpperCase());
-    formData.append('image', fileField.files[0]);
+    formData.append('image', keyValue.toUpperCase() + "."+fileField.value.split('.')[1]);
+    
     formData.append('user', id);
     const x = sessionStorage.getItem("token");
 
@@ -286,7 +287,7 @@ export async function updateimagemodify (activity, detail, id)  {
     mode: 'cors',
 
       // body: JSON.stringify(formDatar)
-    body:JSON.stringify( { detail: detail, id: id, activity: activity, image: keyValue.toUpperCase()   })
+    body:JSON.stringify( { detail: detail, id: id, activity: activity, image:keyValue.toUpperCase() + "."+fileField.value.split('.')[1]  })
     }).then(
       fetch(server + ':9000/addimage', {
       method: 'POST',
@@ -345,7 +346,10 @@ export async function updateimagemodify (activity, detail, id)  {
     const fileField = document.querySelector('input[type="file"]');
 
     formData.append('key',keyValue.toUpperCase());
-    formData.append('image', fileField.files[0]);
+
+    console.log("test value:");
+    console.log(fileField.value);
+    formData.append('image', fileField.value );
     formData.append('user', uid);
 
     await fetch(apiUrl, requestOptions).then(

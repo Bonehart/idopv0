@@ -37,7 +37,6 @@ export const Detailed = props => {
           <div class = "main-detailed"> 
             <div class = "for-detailed">
               <div className = 'derr1' style={{display:     hamburger == true ? "inline": "none"   }}>
-
                 <DetailedMenu  />  
                 </div>
 
@@ -48,7 +47,7 @@ export const Detailed = props => {
                   </div>
   
                 <div class = "test">
-                    <div class = "inner-image fill"><img src={"/Images/" +  currentpost.image + ".png"}  /> </div>
+                    <div class = "inner-image fill"><img src={"/Images/" +  currentpost.image }  /> </div>
                         <div class = "inner-things">
                             <div class = "inner-title">
                             </div>

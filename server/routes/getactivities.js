@@ -127,7 +127,7 @@ router.post("/updatebyid",function (req, res,next) {
 
 
     try{
-console.log("running update by id");
+
 
         var id_ = req.body.id;
      
@@ -170,7 +170,7 @@ console.log("running update by id");
 // });
 
 router.post("/updatebyidimg",function (req, res,next) {
-    console.log("here");
+
 
     var id_ = req.body.id;
     var image = req.body.image;
@@ -186,7 +186,6 @@ router.post("/updatebyidimg",function (req, res,next) {
               res.send("activity modified")
           }
       })
-      console.log(image);
 });
 
 /**** updated image by id used for modifying records allows modification of text only  ****/

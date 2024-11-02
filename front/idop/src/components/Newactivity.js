@@ -87,7 +87,7 @@ export const Newactivity = props => {
                   </div>
   
                 <div class = "test">
-                  New activity
+                  New activity 111111
                     <div class = "inner-image fill"><img src={"/Images/" +   ".png"}  /> </div>
                         <div class = "inner-things">
                             <div class = "inner-title">

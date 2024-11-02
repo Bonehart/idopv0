@@ -24,6 +24,7 @@ import { ChangeTextButton } from './components/ChangeTextButton.js';
 import { DetailedMenu } from './components/DetailedMenu.js';
 import { ModifyActivityField } from './components/ModifyActivityField.js';
 import { Activity } from './components/Activity.js';
+import { Account } from './components/Account.js';
 import { Interaction } from './components/Interaction.js';
 import { Buttonmenu } from './components/Buttonmenu.js';
 import { ModifyButtonmenu } from './components/ModifyButtonmenu.js';
@@ -41,8 +42,6 @@ import { PageContext } from './PageContext.js';
 const auth = getAuth();
 
 function Home() {
-
-
 
   const [hamburger, sethamburger] = useState(false);
   // hooker to get user info - rename this
@@ -117,8 +116,12 @@ function Home() {
     modify,
     setmodify,
     setnewtask,
+    setaccount,
+    account,
     setinteraction
   });
+
+
   // react hook re-load data when key hooks are modified //
   useEffect(() => {
 
@@ -155,6 +158,8 @@ function Home() {
     modify,
     setmodify,
     setnewtask,
+    account,
+    setaccount,
     setinteraction
   };
   
@@ -172,11 +177,11 @@ var navprops = {}
   // if the new task flag is set then return the Newactivity component//
   if (interaction) {    
     return (  
-<> 
-      <PageContext.Provider value={contextValue}>
-          <Interaction contextValue = {contextValue}> </Interaction>
-  </PageContext.Provider>
-</>
+      <> 
+            <PageContext.Provider value={contextValue}>
+                <Interaction contextValue = {contextValue}> </Interaction>
+        </PageContext.Provider>
+      </>
     ) 
   }
 
@@ -192,8 +197,6 @@ var navprops = {}
   if (authvar) {
     return <p> is loading auth </p>;
   }
-
-
 
 
   // if the new task flag is set then return the Newactivity component//
@@ -218,30 +221,40 @@ var navprops = {}
   // if account button is clicked //
   if (account) {
     return (
-      <div class="container">
-        <div class="account-card">
-          <h2>User Account</h2>
+      <PageContext.Provider value={contextValue}>
+          <Account 
+          usernm= {usernm} >
+    
+          
 
-          <div class="form-group">
-            <label for="username">Username:</label>
-            <p name="email" id="email">  {usernm.displayName} </p>
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <p name="email" id="email">  {usernm.email}  </p>
-          </div>
+          </Account>
 
-          <div class="form-group">
-            <button onClick={() => { resetpw(usernm.email); setreset(true); }}>Reset Password</button>
-          </div>
+  </PageContext.Provider>
+      
+      // <div class="container">
+      //   <div class="account-card">
+      //     <h2>User Account</h2>
 
-          {reset ? (<p style={{ color: 'red' }} > Pasword reset ! </p>) : (<p> </p>)}
+      //     <div class="form-group">
+      //       <label for="username">Username:</label>
+      //       <p name="email" id="email">  {usernm.displayName} </p>
+      //     </div>
+      //     <div class="form-group">
+      //       <label for="email">Email:</label>
+      //       <p name="email" id="email">  {usernm.email}  </p>
+      //     </div>
 
-          <div class="form-group">
-            <button onClick={() => { setaccount(false); setreset(false); }} >Back</button>
-          </div>
-        </div>
-      </div>
+      //     <div class="form-group">
+      //       <button onClick={() => { resetpw(usernm.email); setreset(true); }}>Reset Password</button>
+      //     </div>
+
+      //     {reset ? (<p style={{ color: 'red' }} > Pasword reset ! </p>) : (<p> </p>)}
+
+      //     <div class="form-group">
+      //       <button onClick={() => { setaccount(false); setreset(false); }} >Back</button>
+      //     </div>
+      //   </div>
+      // </div>
     )
   }
 
@@ -383,16 +396,15 @@ var navprops = {}
   // if detailed button is clicked //
   if (detailed) {
      return (
-
       <PageContext.Provider value={contextValue}>
        <Interaction
-       
+  
+
        variant = {"detailed"}/> 
       </PageContext.Provider> 
 
    )
   }
-
 
   // if detailed button is clicked //
   if (modify) {
@@ -411,14 +423,15 @@ var navprops = {}
     <>
 
 <PageContext.Provider value={contextValue}>
-    <NavBar setnewtask={setnewtask}
-    newtask={newtask}/>
+    <NavBar 
+    
+    setnewtask={setnewtask}
+    newtask={newtask}
+    account={account}
+    setaccount={setaccount}
+    />
  </PageContext.Provider> 
 
-
-
-
-    
 <section class="main">
     <div class="wrapper">
         <div class="left-col">
