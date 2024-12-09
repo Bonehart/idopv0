@@ -48,33 +48,51 @@ export const Newactivity = props => {
       ;
   }
 
-  return (
-    // <div class="body">
-    //   <div class = 'new-post'> 
-    //   <h2 class="card-heading">            Today's Activity</h2>
-    //   <input type="text" class="new-text-box2" onChange={props.onchange} placeholder="New Activity Title"  id="fname" name="fname"></input>
-    //   <TextField  style ={{width: '100%'}}
-    //               id ="activitydetail"
-    //               variant="outlined" 
-    //               multiline
-    //               minRows = {20}
-    //               maxRows={20}
-    //               onChange={props.onchangedetail}
-    //               margin="normal"
-    //               placeholder="Enter details about activity"
-    //               />
+  const maindetailed = {
+    display: "flex",
+    height: "1000px",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  };
 
-    //           <Button variant="contained"  type="submit"  onClick={()=>(document.getElementById('image').click())} >  <input hidden type="file" name="image" id ="image"/> Image </Button>
-    //           <Button variant="contained" onClick={props.onclick} >Write to time line</Button>
-    //           <Button variant="contained" onClick={props.back} >
-    //             Back
-    //           </Button>
-    //   </div>
+
+  
+  const fordetailed = {
+    display: flex,
+
+        alignitems: "center",
+        justifycontent: "center",
+        height: "800px",
+        width: "66%",
+
+        flexdirection: "column"
+    
+    };
+
+    const innerthing ={
+      width: "45%",
+      height: "100%"
+      
+      };
+
+    const test = {
+        height:  "80%",
+        width: "80%",
+        borderbottomleftradius: "25px",
+        borderbottomrightradius: "25px",
+        display: "flex",
+        alignitems: "center",
+        justifycontent: "center"
+        };
+
+  return (
+
       <>
 
         <NavBar />
-          <div class = "main-detailed"> 
-            <div class = "for-detailed">
+          <div style={maindetailed}> 
+            <div style={fordetailed}>
               <div className = 'derr1' style={{display:     hamburger == true ? "inline": "none"   }}>
 
                 <DetailedMenu  />  
@@ -86,12 +104,11 @@ export const Newactivity = props => {
                       </div>
                   </div>
   
-                <div class = "test">
-                  New activity 111111
-                    <div class = "inner-image fill"><img src={"/Images/" +   ".png"}  /> </div>
-                        <div class = "inner-things">
-                            <div class = "inner-title">
-                            </div>
+                <div style={test}>
+  
+                    <div class = "inner-image"><img src={"/Images/" +   ".png"}  /> </div>
+                        <div style={innerthing}>
+                  
                             <div class = "inner-content">
                            
                             <ModifyActivityField 

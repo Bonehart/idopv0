@@ -37,6 +37,45 @@ export function handleImageError(img) {
 
 
 
+export async function callAPI(hook,hookVar, data){
+
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+
+  let response = await  fetch(new URL(server+':9000/randomrecords'), requestOptions);
+  await hookVar(response);
+}
+
+
+export async function getdatarandataforhome(hookVar){
+
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+
+   let response = await  fetch(new URL(server+':9000/getactivities/randomrecords'), requestOptions).then(response => response.json());
+  // let response = await  fetch(new URL(server+':9000/getactivities/randomrecords'), requestOptions);
+  console.log(response);
+  await hookVar(response);
+
+
+}
+
+
+
  export async function getuserData(hookVar, user, token,hookload) {
      var apiUrl =  new URL(server+':9000/getactivities');
      var myHeaders = new Headers();
@@ -82,6 +121,8 @@ export function handleImageError(img) {
     }
 
 }  
+
+
 
 
 export async function getdatafromlistbyuid (uid, list, hook, viewhook, viewhook2){
@@ -310,9 +351,6 @@ export async function updateimagemodify (activity, detail, id)  {
 
     const x = sessionStorage.getItem("token");
 
-    // var myHeaders = new Headers();
-    // myHeaders.append("Authorization", "Bearer "  +  x);
-    // myHeaders.append('Content-Type', 'application/json');
 
     fetch(server+':9000/getactivities/updatebyid', {
       method: 'POST',
@@ -366,23 +404,7 @@ export async function updateimagemodify (activity, detail, id)  {
      );
   }
 
-  function setHeader(time) {
-    let message;
-    switch ("frienddataview") {
-      case 'morning':
-        message = 'Viewing friend data';
-        break;
-      case 'afternoon':
-        message = 'Good afternoon!';
-        break;
-      case 'evening':
-        message = 'Good evening!';
-        break;
-      default:
-        message = 'Hello!';
-    }
-    return message;
-  }
+
   
 
   function toggleMenu() {
@@ -392,4 +414,4 @@ export async function updateimagemodify (activity, detail, id)  {
 
   
 
-  export default {getuserData,sendFilenoimage,sendtestimage, addfrienddb,deletedatabyid,sendFile,getdatafromlistbyuid,setHeader,toggleMenu,handleImageError,updatepost}
+  export default {getdatarandataforhome,getuserData,sendFilenoimage,sendtestimage, addfrienddb,deletedatabyid,sendFile,getdatafromlistbyuid,toggleMenu,handleImageError,updatepost}

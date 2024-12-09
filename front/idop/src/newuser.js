@@ -66,50 +66,78 @@ function Newuser() {
      
   return (
 
-
- <div class = "body"> 
-
-          <ResponsiveAppBar />
-
+<body>
+  <div id="SignupContainer">
+    <div class="signupBox">
+      <header>
+        <h2>IDOP</h2>
+        <p>SIGN UP AND WASTE TIME</p>
+        {/* <button><i class="fab fa-facebook"></i>Log in with Facebook</button> */}
+      </header>
+      <div class="seperator">
+        {/* <hr />OR
+        <hr /> */}
+      </div>
+      <form action="#">
     
-    <div class="regcontainer">
-      <br/>
-    <form>
-      <label for="screenname">Enter Username:</label>
-      <input id="screenname" type="text" name="screenname" onChange={e => setscreenname(e.target.value)} placeholder="First Name" required />
-  
-      <label for="username">Enter Email:</label>
-      <input id="username" type="email" name="username" onChange={e => setusername(e.target.value)} placeholder="Email" required />
-  
-      <label for="password">Enter Password:</label>
-      <input id="password" type="password" name="password" onChange={e => setpassword(e.target.value)} required />
+        <input type="text" name="screenname" onChange={e => setscreenname(e.target.value)}  placeholder="Username" />
+        <input type="text" name="username" onChange={e => setusername(e.target.value)} placeholder="Email" />
 
-      <label for="password2"> Re-enter password: </label>
-       <input id="password2"  type="password" name="password2"  onChange={e => setpassword2(e.target.value)}></input>
+        <input type="password" id="password"  name="password" onChange={e => setpassword(e.target.value)} required placeholder="Password"/>
+        <input id="password2"  type="password" name="password2"  placeholder="Re-enter Password" onChange={e => setpassword2(e.target.value)}></input>
       {isValid && !strongRegexpass ? (
         <p>Password must be at least 6 characters long and contain a capital letter, a number, and a special character.</p>
       ) : null}
-      
 
-      {isValid && strongRegexpass ? (
+{isValid && strongRegexpass ? (
         
-      <button type="submit" disabled={!isValid || !strongRegexpass} onClick={e => {
-        registerWithEmailAndPassword(screenname, username, password);
-        setregistercomplete(true);
-      }}>Register</button>
-      ) : 
-      <button id="no-sub" type="submit" disabled={!isValid || !strongRegexpass} >Register</button>}
-      
-      {isValid && !strongRegexpass ? null : (
-        <p>{passworderror}</p>
-      )}
-  
-    </form>
+        <button type="submit" disabled={!isValid || !strongRegexpass} onClick={e => {
+          registerWithEmailAndPassword(screenname, username, password);
+          setregistercomplete(true);
+        }}>Register</button>
+        ) : 
+        <button id="no-sub" type="submit" disabled={!isValid || !strongRegexpass} >Register</button>}
+                {/* <button  id="no-sub" type="submit" disabled={!isValid || !strongRegexpass}>Sign up</button> */}
+        
+        {isValid && !strongRegexpass ? null : (
+          <p>{passworderror}</p>
+        )}
+    
+{/*   
+        <button type="button" disabled>Sign up</button> */}
 
-    <Link to="/">Back </Link>  
+      </form>
+      <footer>
+        <p>
+          By signing up, you agree to <a href="#">Waste</a> and <a href="#">Time</a> .
+        </p>
+      </footer>
+    </div>
   </div>
-  
+  <div id="BottomContainer">
+    <p>
+      Have an account? <a href="#">Log in</a>
+    </p>
   </div>
+  <div id="AppsContainer">
+    <p></p>
+    {/* <img src="https://i.postimg.cc/Vkm7D9Xd/appstore.png" alt="appstore" />
+    <img src="https://i.postimg.cc/R00gzMsm/playstore.png" alt="playstore" /> */}
+  </div>
+  <div id="LastContainer">
+    <div class="links">
+      <a href="#">WASTE YOUR TIME</a>
+
+    </div>
+    <div class="copyright">
+      <p>DON'T WASTE TIME FRIEND
+      </p>
+    </div>
+  </div>
+</body>
+
+
+ 
     
   );
 }

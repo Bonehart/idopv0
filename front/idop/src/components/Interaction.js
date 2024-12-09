@@ -35,7 +35,7 @@ export const Interaction = (props) => {
     setmodify,
     setnewtask,
     setinteraction} = useContext(PageContext);
-  // const { currentpost, setdetailed, setmodify, detailed, modify } = useContext(PageContext);
+
   const sendFile = () => {
     const formData = new FormData();
     const fileField = document.querySelector('input[type="file"]');

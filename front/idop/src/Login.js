@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import  './css/login.css';
+import  './css/loginpage.css';
 // import { Provider } from 'react-redux'
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
 import { app, logInWithEmailAndPassword, logOut } from './Firebase'
@@ -54,43 +54,37 @@ if(loggedout){
 }
 
 return (
-<div class ="body"> 
-<ResponsiveAppBar />
 
+<>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Overpass+Mono" rel="stylesheet"/>
 
-<br>
-</br>
-  
+<div id="wrapper">
+  <div class="main-content">
+     <div class="header"> 
+     <img src="idop.png" class="brand-img" alt="" />
 
-<p> Login</p>
-      <div class="container">
-      <div class="account-card">
-        
-				<div class="form-group">
-        <label for="username">Enter name: </label>
-         <input id="username" type="text" name="username" onChange={e => setusername(e.target.value)} placeholder="User name"></input>
-         </div>
-
-				<div class="form-group">
-        <label for="password"> Enter password: </label>
-        <input id="password"  type="password" name="password"  onChange={e => setpassword(e.target.value)} ></input> 
-        </div>
-
-        <div class="form-group">
-        <button onClick={e => {logInWithEmailAndPassword(username, password); } }> Login </button>
-
-        </div>
-        <div class="form-group">
-        <button onClick={e => {logOut(); setauthview(auth); setloggedout(true); } }> Logout </button>
-        </div>
-        <Link to="/">Back </Link>  
-
-     
-       <p> {loginerror}</p>
-     </div>
-    </div>
+     </div> 
+    <div class="l-part">
+      <input type="text"  id="username"  placeholder="Username" class="input-1" onChange={e => setusername(e.target.value)} />
+      <div class="overlap-text">
+        <input type="password" id="password" placeholder="Password"  onChange={e => setpassword(e.target.value)} class="input-2" />
+        <a href="#">Forgot?</a>
+      </div>
+      <input type="button" value="Log in" class="btn" onClick={e => {logInWithEmailAndPassword(username, password); } }/>
 
     </div>
+    <p> {loginerror}</p>
+  </div>
+
+  <div class="sub-content">
+    <div class="s-part">
+      Don't have an account?<a href="#">Sign up</a>
+    </div>
+  </div>
+</div>
+
+
+</>
   );
 }
 

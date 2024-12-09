@@ -1,0 +1,83 @@
+/* Gallery container */
+.gallery {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Default: 3 items wide */
+  gap: 20px; /* Increased gap for better spacing */
+  justify-content: center;
+}
+
+/* Adjust to two items wide for smaller screens */
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 items wide on smaller screens */
+  }
+}
+
+/* Gallery items */
+.gallery-item {
+   position: relative; 
+  width: 100%; /* Full width of the grid cell */
+  aspect-ratio: 1 / 1; /* Square container */
+  overflow: hidden;
+  background-color: #f9f9f9; /* Softer background color */
+  border-radius: 10px; /* Larger rounded corners */
+
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for depth */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.gallery-item:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Text overlay at the bottom with large heading and spacious layout */
+ .text-overlay {
+  /* position: absolute; */
+  bottom: 0; /* Place text at the bottom */
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85); /* Transparent white background */
+  color: #333; /* Darker font color */
+  font-family: 'Helvetica Neue', Arial, sans-serif; /* Elegant sans-serif font */
+  text-align: center;
+  padding: 15px; /* More padding for spaciousness */
+  box-sizing: border-box;
+  border-top: 3px solid #ccc; /* Subtle border at the top of the overlay */
+;
+}
+
+.article-heading{
+   height: 20%; 
+}
+
+
+.text-overlay {
+
+  height: 20%; 
+}
+
+.text-overlay h2 {
+  margin: 0; /* Remove default margin */
+  font-size: 20px; /* Large heading size */
+  font-weight: 700; /* Bold for emphasis */
+  line-height: 1.5; /* Added line height for readability */
+
+}
+
+.text-overlay p {
+  margin: 10px 0 0; /* Space below heading */
+  font-size: 14px; /* Smaller supporting text */
+  font-weight: 400; /* Normal weight for contrast */
+  color: #555; /* Slightly lighter color */
+}
+
+/* Image resized to fit the entire container */
+.gallery-item img {
+
+ position: relative; 
+  width: 100%;
+  height: 60%; 
+  object-fit:  contain; 
+  border-radius: 10px 10px 0 0;  
+}

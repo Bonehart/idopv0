@@ -12,7 +12,7 @@ import { Database, getDatabase } from "firebase/database";
 import { app, logInWithEmailAndPassword, logOut, resetpw, addFriend, getuserinfoData, getFriends, confirmFriend, getUsers } from './Firebase'
 
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getuserData, sendFilenoimage, deletedatabyid, deleteimagebyid, handlepreview, addfrienddb, getfriendsdata, getdatafromlistbyuid, handleImageError,updatepost } from "./useractions";
+import {getdatarandataforhome, getuserData, sendFilenoimage, deletedatabyid, deleteimagebyid, handlepreview, addfrienddb, getfriendsdata, getdatafromlistbyuid, handleImageError,updatepost } from "./useractions";
 
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -26,18 +26,19 @@ import { ModifyActivityField } from './components/ModifyActivityField.js';
 import { Activity } from './components/Activity.js';
 import { Account } from './components/Account.js';
 import { Interaction } from './components/Interaction.js';
+import { Leftnav } from './components/Leftnav.js';
 import { Buttonmenu } from './components/Buttonmenu.js';
 import { ModifyButtonmenu } from './components/ModifyButtonmenu.js';
 import { Detailed } from './components/Detailed.js';
 import { Modify } from './components/Modify.js';
 import { NavBar } from './components/NavBar.js';
+import { Articles } from './components/Articles.js';
 import postactivity from "./postactivity";
 import TextField from '@mui/material/TextField';
 import { server } from "./server.js"
 import ResponsiveAppBar from './components/Toolbar.js';
 import { useThemeProps } from "@mui/material";
 import { PageContext } from './PageContext.js';
-
 
 const auth = getAuth();
 
@@ -106,8 +107,12 @@ function Home() {
   const [deleted, setdeleted] = useState(false);
   const[interaction, setinteraction] = useState(false);
 
+  const[articles, setarticles] = useState(true);
 
+
+  const[articlesdata, setarticlesdata] = useState([]);
   const[context, setcontext] = useState({
+
     currentpost,
     setdetailed,
     sethamburger,
@@ -118,7 +123,10 @@ function Home() {
     setnewtask,
     setaccount,
     account,
-    setinteraction
+    setinteraction,
+    articlesdata,
+    setdetailed,
+    setcurrentpost,
   });
 
 
@@ -132,6 +140,8 @@ function Home() {
           settokenid(idToken);
           sessionStorage.setItem("token", idToken);
           getuserData(setuserdata, userlog.uid, idToken, setloadingvar);
+
+          getdatarandataforhome(setarticlesdata);
           getFriends(userlog.uid, setfriendlist, setfriendrequestslist);
           getUsers(setuserslist, setloadingvar, userlog.uid);
           getfriendsdata(setfriendsdata, userlog.uid, idToken);
@@ -225,36 +235,11 @@ var navprops = {}
           <Account 
           usernm= {usernm} >
     
-          
-
           </Account>
 
   </PageContext.Provider>
       
-      // <div class="container">
-      //   <div class="account-card">
-      //     <h2>User Account</h2>
-
-      //     <div class="form-group">
-      //       <label for="username">Username:</label>
-      //       <p name="email" id="email">  {usernm.displayName} </p>
-      //     </div>
-      //     <div class="form-group">
-      //       <label for="email">Email:</label>
-      //       <p name="email" id="email">  {usernm.email}  </p>
-      //     </div>
-
-      //     <div class="form-group">
-      //       <button onClick={() => { resetpw(usernm.email); setreset(true); }}>Reset Password</button>
-      //     </div>
-
-      //     {reset ? (<p style={{ color: 'red' }} > Pasword reset ! </p>) : (<p> </p>)}
-
-      //     <div class="form-group">
-      //       <button onClick={() => { setaccount(false); setreset(false); }} >Back</button>
-      //     </div>
-      //   </div>
-      // </div>
+      
     )
   }
 
@@ -430,43 +415,41 @@ var navprops = {}
     account={account}
     setaccount={setaccount}
     />
- </PageContext.Provider> 
+ </PageContext.Provider>  
+
 
 <section class="main">
     <div class="wrapper">
-        <div class="left-col">
+    <div class="left-col">
+      
+       <PageContext.Provider value={contextValue}>
+    <Leftnav 
+    
+    setnewtask={setnewtask}
+    newtask={newtask}
+    account={account}
+    setaccount={setaccount}
+    articles={articles}
+    setarticles={setarticles}
+    />
+ </PageContext.Provider> </div>
+    
+        <div class="centre-col">
 
-        {frienddataview ?
-          friendsdata.map((post) => (
-            <>
-              <Activity
-                label={"friends data "}
-                post={post}
-                setdetailed={setdetailed}
-                setcurrentfrienduserdata={setcurrentfrienduserdata}
-                setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
-                setfrienddataview={setfrienddataview}
-                getdatafromlistbyuid={getdatafromlistbyuid}
-                friendsdata={friendsdata}
-                userpage={false}
-              > </Activity> </>
-          ))
-          :
-          (viewcurrentfrienduserdata ? currentfrienduserdata.map((post) => (
-            <Activity
-              label={"current friends data "}
-              post={post}
-              setdetailed={setdetailed}
-              setcurrentpost={setcurrentpost}
-              setcurrentfrienduserdata={setcurrentfrienduserdata}
-              setviewcurrentfrienduserdata={setviewcurrentfrienduserdata}
-              setfrienddataview={setfrienddataview}
-              getdatafromlistbyuid={getdatafromlistbyuid}
-              friendsdata={friendsdata}
-              userpage={false}
-            > </Activity>
-          )) : userdata.map((post) => (
-            <Activity
+           {   articles ? 
+               
+       <PageContext.Provider value={contextValue}>
+    <Articles
+    articlesdata= {articlesdata}
+    setcurrentpost={setcurrentpost}
+    setdetailed={setdetailed}
+    // setdetailed = {setdetailed}
+    /> 
+       </PageContext.Provider>
+       
+           : (userdata.map( 
+            
+            (post) =>  (     <Activity
               label={" "}
               post={post}
               setdetailed={setdetailed}
@@ -476,14 +459,17 @@ var navprops = {}
               getdatafromlistbyuid={getdatafromlistbyuid}
               friendsdata={friendsdata}
               userpage={true}
-            > </Activity>
-          ))
-          )
-        }
-          
-            </div>
-        </div>
+            > </Activity>)
 
+           ))}
+             
+
+   
+            
+  </div>
+     <div class="right-col"> </div>
+</div>
+ 
 </section>
   
     </>

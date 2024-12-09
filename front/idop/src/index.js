@@ -1,7 +1,7 @@
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-
+import './css/index.css';
 
 // import { Provider } from 'react-redux'
 import Login from "./Login";
@@ -17,6 +17,10 @@ render(
 
    <BrowserRouter>
   <Routes>
+
+
+
+    
     <Route path="/"      element={<App />} />
     <Route path="/newuser" element={<Newuser />} /> 
     <Route path="/login" element={<Login />} />

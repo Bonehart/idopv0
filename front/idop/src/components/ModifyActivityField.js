@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export const ModifyActivityField = props => {
 
+
     return (
       // if modify is clicked //
       props.modify ? (
@@ -25,7 +26,8 @@ export const ModifyActivityField = props => {
                   resize: 'vertical',
                   color: 'inherit',
                   font: 'inherit',
-                    overflow: 'auto'
+                    overflow: 'auto',
+                    border: 'none'
         }}
         onChange={props.onchange}
         >
@@ -46,7 +48,8 @@ export const ModifyActivityField = props => {
               resize: 'vertical',
               color: 'inherit',
               font: 'inherit',
-                overflow: 'auto'
+                overflow: 'auto',
+                border: 'none'
             }}
             onChange={props.onchangedetail}
             >

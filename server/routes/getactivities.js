@@ -35,22 +35,17 @@ async function getactivitybyid(model, id) {
 
 async function getrandact(model, connection) {
      var random = Math.floor(Math.random() * 1);
-     return model.find().skip(random).limit(5).then(function (act) { return act });
+     return model.find().skip(random).limit(10).then(function (act) { return act });
 };
-
-
 
 /****  route to get list of activities based on username ****/
 router.get("/", checkIfAuthenticated, function (req, res, next) {
-
      const user = req.query.username;
      getactivity(activity, user).then(function (x) {
           res.send(x);
      }   
   );
 });
-
-
 
 /**** route to get distinct list of users ****/
 router.get("/getrandusers",checkIfAuthenticated, async function (req, res, next) {
@@ -69,12 +64,9 @@ async function getfriends(model, uid) {
 };
 
 router.get("/getfriendsdata",checkIfAuthenticated, async function (req, res,next) {
-
     friendslist = await friend.find({"uid" : req.query.username}).distinct("friend_uid");
-
     filter_condition = {username: {'$in': friendslist}}
     filtered_documents = await activity.find(filter_condition);
-
     res.send(filtered_documents);
     res.end();
 }
@@ -124,16 +116,10 @@ router.get("/deleteimagebyid",checkIfAuthenticated, function (req, res,next) {
 /**** updated by id used for modifying records allows modification of text only  ****/
 /**** modifies the titles of the activity and the detail****/
 router.post("/updatebyid",function (req, res,next) {
-
-
     try{
-
-
         var id_ = req.body.id;
-     
         var  activitydata = req.body.activity;
         var detail = req.body.detail;
-   
        activity.findByIdAndUpdate(id_,{"activity": activitydata, "detail": detail}, function(err, result){
               if(err){
                   res.send(err)
@@ -145,29 +131,9 @@ router.post("/updatebyid",function (req, res,next) {
     }
     catch (e)
     {
-
         console.log("erroir is " + e);
     }
-
-
 });
-
-// router.post("/updatebyidimg", checkIfAuthenticated,function (req, res,next) {
-//     var id_ = req.body.id;
-//     var  activitydata = req.body.activity;
-//     var detail = req.body.detail;
-//     var image = req.body.image;
-
-//    activity.findByIdAndUpdate(id_,{"activity": activitydata, "detail": detail, "image": image}, function(err, result){
-//           if(err){
-//               res.send(err)
-//           }
-//           else{
-//               res.send("activity modified")
-//           }
-//       })
-//       console.log(image);
-// });
 
 router.post("/updatebyidimg",function (req, res,next) {
 
@@ -220,13 +186,24 @@ router.post("/deletebyid", checkIfAuthenticated,function (req, res,next) {
 });
 
 
-router.get("/gethomeact", checkIfAuthenticated,function (req, res, next) {
+router.get("/gethomeact",function (req, res, next) {
      getrandact(activity).then(function (x) {
-   
           res.send(x);
      }
      );
 });
+
+router.get("/randomrecords", async (req, res, next) => {
+    try { 
+      const randomRecords = await activity.aggregate().sample(10).then(function (act) { return act });;
+      res.send(randomRecords);
+    } catch (error) {
+      console.error('Error fetching random records:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+
 
 module.exports = router;
  
