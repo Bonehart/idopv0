@@ -52,8 +52,7 @@ export const Detailed = props => {
                             <div class = "inner-title">
                             </div>
                             <div class = "inner-content">
-
-                           
+                     
                             <ModifyActivityField 
                               modify ={modify}
                               currentpost={currentpost}/> 

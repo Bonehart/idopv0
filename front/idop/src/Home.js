@@ -19,7 +19,7 @@ import 'firebase/compat/firestore';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Newactivity } from './components/Newactivity.js';
+import { Newactivity } from './components/Newactivity2.js';
 import { ChangeTextButton } from './components/ChangeTextButton.js';
 import { DetailedMenu } from './components/DetailedMenu.js';
 import { ModifyActivityField } from './components/ModifyActivityField.js';

@@ -27,7 +27,7 @@ export const ModifyActivityField = props => {
                   color: 'inherit',
                   font: 'inherit',
                     overflow: 'auto',
-                    border: 'none'
+                    border: 'solid .5px'
         }}
         onChange={props.onchange}
         >
